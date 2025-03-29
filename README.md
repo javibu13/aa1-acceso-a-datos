@@ -47,10 +47,10 @@ se produzcan.
 
 # Descripción
 API REST que permite realizar operaciones CRUD sobre una base de datos MySQL. La base de datos contiene las tablas necesarias para gestionar una serie de entidades relacionadas entre sí. En este proyecto se ha decidido trabajar con las siguientes entidades:
-- Evento: Representa un evento que se celebra en un lugar, en una fecha concreta, con unos asistentes determinados, organizado por una persona y en el que se va a desempeñar una actividad en concreto.
-- Lugar: Representa un lugar en el que se puede celebrar un evento.
-- Persona: Representa una persona que puede organizar un evento o asistir a él.
-- Actividad: Representa una actividad que se va a desempeñar en un evento.
-- Asistencia: Representa la asistencia de una persona a un evento.
+- Conferencia (Conference): Representa un evento que se celebra en un lugar, en una fecha concreta, con unos asistentes determinados, organizado por una persona y en el que se van a desempeñar actividades.
+- Lugar (Place): Representa un lugar en el que se puede celebrar un evento.
+- Persona (Person): Representa una persona que puede organizar un evento o asistir a él.
+- Actividad (Activity): Representa una actividad que se va a desempeñar en un evento.
+- Asistencia (Attendance): Representa la asistencia de una persona a un evento.
 
 
