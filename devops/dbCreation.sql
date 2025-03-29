@@ -5,7 +5,7 @@ CREATE TABLE person (
     email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(100) NOT NULL,
     age INT NOT NULL,
-    height DECIMAL(1,2), -- 9.99 max
+    height DECIMAL(3,2), -- 9.99 max
     interests TEXT,
     birth_date DATE,
     verified BOOLEAN DEFAULT FALSE
@@ -43,7 +43,7 @@ CREATE TABLE activity (
     price DECIMAL(10,2),
     open BOOLEAN DEFAULT FALSE,
     schedule DATETIME NOT NULL,
-    conference_id INT NOT NULL,
+    conference_id BIGINT NOT NULL,
 
     FOREIGN KEY (conference_id) REFERENCES conference(id) ON DELETE CASCADE
 );
@@ -55,8 +55,8 @@ CREATE TABLE attendance (
     ticketPrice DECIMAL(10,2),
     checked_in BOOLEAN DEFAULT FALSE,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    person_id INT NOT NULL,
-    conference_id INT NOT NULL,
+    person_id BIGINT NOT NULL,
+    conference_id BIGINT NOT NULL,
 
     FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE,
     FOREIGN KEY (conference_id) REFERENCES conference(id) ON DELETE CASCADE
