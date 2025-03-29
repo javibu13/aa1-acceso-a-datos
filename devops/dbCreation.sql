@@ -5,7 +5,7 @@ CREATE TABLE person (
     email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(100) NOT NULL,
     age INT NOT NULL,
-    height DECIMAL(3,2), -- 9.99 max
+    height FLOAT, -- 9.99 max
     interests TEXT,
     birth_date DATE,
     verified BOOLEAN DEFAULT FALSE
@@ -16,7 +16,7 @@ CREATE TABLE place (
     name VARCHAR(100) NOT NULL,
     address VARCHAR(200) NOT NULL,
     capacity INT,
-    area DECIMAL(5,2),
+    area FLOAT,
     inauguration_date DATE,
     has_parking BOOLEAN DEFAULT FALSE,
     equipment TEXT
@@ -26,7 +26,7 @@ CREATE TABLE conference (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     capacity INT,
-    budget DECIMAL(10,2),
+    budget FLOAT,
     online BOOLEAN DEFAULT FALSE,
     start_date DATE NOT NULL,
     place_id BIGINT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE activity (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     duration INT NOT NULL,
-    price DECIMAL(10,2),
+    price FLOAT,
     open BOOLEAN DEFAULT FALSE,
     schedule DATETIME NOT NULL,
     conference_id BIGINT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE attendance (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     ticket_code VARCHAR(255) NOT NULL,
     seat_number INT,
-    ticketPrice DECIMAL(10,2),
+    ticketPrice FLOAT,
     checked_in BOOLEAN DEFAULT FALSE,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     person_id BIGINT NOT NULL,
