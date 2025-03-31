@@ -1,7 +1,11 @@
 package com.sanvalero.apieventos.service;
 
+import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.domain.Place;
+import com.sanvalero.apieventos.dto.PersonOutDTO;
 import com.sanvalero.apieventos.repository.PlaceRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,27 @@ public class PlaceService {
         return placeRepository.findAll();
     }
 
+    public List<Place> getPlacesByFilters(Integer minCapacity, Integer maxCapacity, Boolean hasParking) {
+        if (minCapacity != null && maxCapacity == null && hasParking == null) {
+            return placeRepository.findByCapacityGreaterThanEqual(minCapacity);
+        } else if (minCapacity == null && maxCapacity != null && hasParking == null) {
+            return placeRepository.findByCapacityLessThanEqual(maxCapacity);
+        } else if (minCapacity == null && maxCapacity == null && hasParking != null) {
+            return placeRepository.findByHasParking(hasParking);
+        } else if (minCapacity != null && maxCapacity != null && hasParking == null) {
+            return placeRepository.findByCapacityBetween(minCapacity, maxCapacity);
+        } else if (minCapacity != null && maxCapacity == null && hasParking != null) {
+            return placeRepository.findByCapacityGreaterThanEqualAndHasParking(minCapacity, hasParking);
+        } else if (minCapacity == null && maxCapacity != null && hasParking != null) {
+            return placeRepository.findByCapacityLessThanEqualAndHasParking(maxCapacity, hasParking);
+        } else if (minCapacity != null && maxCapacity != null && hasParking != null) {
+            return placeRepository.findByCapacityBetweenAndHasParking(minCapacity, maxCapacity, hasParking);
+        } else {
+            // If no filters are applied, return all places
+            return placeRepository.findAll();
+        }
+    }
+
     public Optional<Place> getPlaceById(Long id) {
         return placeRepository.findById(id);
     }
@@ -31,7 +56,7 @@ public class PlaceService {
             place.setId(id);
             return placeRepository.save(place);
         } else {
-            return null;
+            throw new EntityNotFoundException("Place not found with id: " + id);
         }
     }
 
