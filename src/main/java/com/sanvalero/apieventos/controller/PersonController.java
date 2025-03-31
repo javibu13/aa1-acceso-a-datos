@@ -59,6 +59,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonOutDTO> getPersonById(@PathVariable Long id) {
+        logger.info("Retrieving person with id: {}", id);
         return personService.getPersonById(id)
                 .map(person -> new ResponseEntity<>(person, HttpStatus.OK))
                 .orElseThrow(() -> new EntityNotFoundException("Person not found with id: " + id));
@@ -66,12 +67,14 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<PersonOutDTO> createPerson(@Valid @RequestBody Person person) {
+        logger.info("Creating new person: {}", person);
         PersonOutDTO createdPerson = personService.createPerson(person);
         return new ResponseEntity<>(createdPerson, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonOutDTO> updatePerson(@PathVariable Long id, @Valid @RequestBody Person person) {
+        logger.info("Updating person with id: {} to {}", id, person);
         PersonOutDTO updatedPerson = personService.updatePerson(id, person);
         if (updatedPerson != null) {
             return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
@@ -82,6 +85,7 @@ public class PersonController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
+        logger.info("Deleting person with id: {}", id);
         personService.deletePerson(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
@@ -91,6 +95,7 @@ public class PersonController {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handleException(EntityNotFoundException enfe) {
+        logger.error("EntityNotFoundException: {}", enfe.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), enfe.getClass().getSimpleName(), "Person not found");
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -99,6 +104,7 @@ public class PersonController {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException dive) {
+        logger.error("DataIntegrityViolationException: {}", dive.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), dive.getClass().getSimpleName(), "Error found in the persons request");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -107,6 +113,7 @@ public class PersonController {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handleException(MethodArgumentNotValidException manve) {
+        logger.error("MethodArgumentNotValidException: {}", manve.getMessage());
         Map<String, String> errors = new HashMap<>();
         List<String> errorMessages = new ArrayList<>();
         manve.getBindingResult().getAllErrors().forEach(error -> {
@@ -123,6 +130,7 @@ public class PersonController {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        logger.error("Exception: {}", e.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getClass().getSimpleName(), "An unexpected internal error occurred");
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
