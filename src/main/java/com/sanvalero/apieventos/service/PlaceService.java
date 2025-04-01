@@ -1,8 +1,6 @@
 package com.sanvalero.apieventos.service;
 
-import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.domain.Place;
-import com.sanvalero.apieventos.dto.PersonOutDTO;
 import com.sanvalero.apieventos.repository.PlaceRepository;
 
 import jakarta.persistence.EntityNotFoundException;
