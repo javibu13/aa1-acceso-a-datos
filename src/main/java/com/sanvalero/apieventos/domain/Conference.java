@@ -40,10 +40,12 @@ public class Conference {
     private LocalDate startDate;
 
     @ManyToOne
+    @NotNull(message = "Place cannot be null")
     @JoinColumn(name = "place_id", nullable = false, referencedColumnName = "id")
     private Place place;
 
     @ManyToOne
+    @NotNull(message = "Organizer cannot be null")
     @JoinColumn(name = "organizer_id", nullable = false, referencedColumnName = "id")
     private Person organizer;
 }
