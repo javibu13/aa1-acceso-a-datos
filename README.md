@@ -6,21 +6,21 @@ API desarrollada con SpringBoot en Java para la asignatura de Acceso a Datos del
 Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
 
 ## Requisitos obligatorios
-⬜ Crear una API REST con SpringBoot en Java.
+✅ Crear una API REST con SpringBoot en Java.
 
 ⬜ Diseña la API y escribe el fichero OpenAPI 3.0 de la API. Incluye, al menos, 
 los casos de éxito (20X), 400, 404 y los 500.
 
-⬜ El modelo de datos estará compuesto de, al menos, 5 clases y tendrán que existir 
+✅ El modelo de datos estará compuesto de, al menos, 5 clases y tendrán que existir 
 relaciones entre ellas. Cada clase tendrá, al menos, 6 atributos (String, int, float, 
 boolean y algún tipo para almacenar fechas). Cada clase tendrá, al menos, 2 
 atributos obligatorios y algún otro con algún tipo de restricción de 
 formato/validación. 
 
-⬜ Se tendrá que poder realizar, al menos, las operaciones CRUD sobre cada una de 
+✅ Se tendrá que poder realizar, al menos, las operaciones CRUD sobre cada una de 
 las clases. Se controlarán, al menos, los errores 400, 404 y 500 
 
-⬜ Añade opciones de filtrado para al menos una operación en cada clase en donde se 
+✅ Añade opciones de filtrado para al menos una operación en cada clase en donde se 
 puedan indicar hasta 3 campos diferentes (solo aplicable para operaciones GET).
 
 ⬜ Prepara una colección Postman que permita probar todas las operaciones 
@@ -35,14 +35,14 @@ gestor de Issues para los problemas/fallos que vayan surgiendo.
 
 ⬜ Securiza algunas de tus operaciones de la API con un token JWT.
 
-⬜ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos.
+✅ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos.
 
-⬜ Añade 3 operaciones que utilicen consultas JPQL para extraer la información de la base de datos
+✅ Añade 3 operaciones que utilicen consultas JPQL para extraer la información de la base de datos
 
 ⬜ Añade al fichero de especificación de la API (OpenAPI 3.0) un par de ejemplos 
 para cada operación.
 
-⬜ Añade un log a la API que registre las trazas de todas las operaciones y errores que 
+✅ Añade un log a la API que registre las trazas de todas las operaciones y errores que 
 se produzcan.
 
 
