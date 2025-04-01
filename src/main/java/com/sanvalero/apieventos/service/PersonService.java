@@ -84,6 +84,65 @@ public class PersonService {
         }
     }
 
+    public PersonOutDTO partialUpdatePerson(Long id, Person person) throws EntityNotFoundException, IllegalArgumentException {
+        Optional<Person> existingPerson = personRepository.findById(id);
+        if (existingPerson.isPresent()) {
+            Person updatedPerson = existingPerson.get();
+            if (person.getFirstName() != null) {
+                if (person.getFirstName().isEmpty()) {
+                    throw new IllegalArgumentException("First name cannot be empty");
+                }
+                updatedPerson.setFirstName(person.getFirstName());
+            }
+            if (person.getLastName() != null) {
+                if (person.getLastName().isEmpty()) {
+                    throw new IllegalArgumentException("Last name cannot be empty");
+                }
+                updatedPerson.setLastName(person.getLastName());
+            }
+            if (person.getEmail() != null) {
+                if (person.getEmail().isEmpty() || !person.getEmail().contains("@")) {
+                    throw new IllegalArgumentException("Email cannot be empty");
+                }
+                updatedPerson.setEmail(person.getEmail());
+            }
+            if (person.getPass() != null) {
+                if (person.getPass().isEmpty()) {
+                    throw new IllegalArgumentException("Password cannot be empty");
+                }
+                updatedPerson.setPass(person.getPass());
+            }
+            if (person.getAge() != null) {
+                if (person.getAge() < 0) {
+                    throw new IllegalArgumentException("Age cannot be negative");
+                }
+                updatedPerson.setAge(person.getAge());
+            }
+            if (person.getHeight() != null) {
+                if (person.getHeight() < 0) {
+                    throw new IllegalArgumentException("Height cannot be negative");
+                }
+                updatedPerson.setHeight(person.getHeight());
+            }
+            if (person.getInterests() != null) {
+                updatedPerson.setInterests(person.getInterests());
+            }
+            if (person.getBirthDate() != null) {
+                if (person.getBirthDate().isAfter(java.time.LocalDate.now())) {
+                    throw new IllegalArgumentException("Birth date cannot be in the future");
+                }
+                updatedPerson.setBirthDate(person.getBirthDate());
+            }
+            if (person.getVerified() != null) {
+                updatedPerson.setVerified(person.getVerified());
+            }
+            personRepository.save(updatedPerson);
+            return modelMapper.map(updatedPerson, PersonOutDTO.class);
+        } else {
+            throw new EntityNotFoundException("Person not found with id: " + id);
+        }
+    }
+
     public void deletePerson(Long id) {
         personRepository.deleteById(id);
     }
