@@ -116,10 +116,10 @@ public class PlaceController {
         Map<String, String> errors = new HashMap<>();
         List<String> errorMessages = new ArrayList<>();
         manve.getBindingResult().getAllErrors().forEach(error -> {
-        String fieldName = ((FieldError) error).getField();
-        String message = error.getDefaultMessage();
-        errors.put(fieldName, message);
-        errorMessages.add(message);
+            String fieldName = ((FieldError) error).getField();
+            String message = error.getDefaultMessage();
+            errors.put(fieldName, message);
+            errorMessages.add(message);
         });
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), manve.getClass().getSimpleName(), errorMessages.toString());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
