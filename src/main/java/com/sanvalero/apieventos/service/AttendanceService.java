@@ -115,6 +115,8 @@ public class AttendanceService {
             Attendance attendance = modelMapper.map(attendanceInDTO, Attendance.class);
             attendance.setTicketCode(attendanceOld.getTicketCode());
             attendance.setRegistrationDate(attendanceOld.getRegistrationDate());
+            attendance.setConference(conference.get());
+            attendance.setPerson(person.get());
             attendance.setId(id);
             Attendance attendanceSaved = attendanceRepository.save(attendance);
             // Map the saved entity to the output DTO
