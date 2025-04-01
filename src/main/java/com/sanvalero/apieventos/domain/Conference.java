@@ -1,9 +1,9 @@
 package com.sanvalero.apieventos.domain;
 
 import jakarta.persistence.*;
-// import com.sanvalero.apieventos.domain.Place;
-// import com.sanvalero.apieventos.domain.Person;
-
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,24 +20,30 @@ public class Conference {
     private Long id;
 
     @Column(nullable = false)
+    @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
+    @Column
+    @Min(value = 1, message = "Capacity must be greater than or equal to 1")
     private Integer capacity;
 
     @Column
+    @Min(value = 0, message = "Budget must be greater than or equal to 0")
     private Double budget;
 
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean online;
 
     @Column(name = "start_date", nullable = false)
+    @NotNull(message = "Start date cannot be null")
     private LocalDate startDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "place_id", nullable = false, referencedColumnName = "id")
     private Place place;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "organizer_id", nullable = false, referencedColumnName = "id")
     private Person organizer;
 }

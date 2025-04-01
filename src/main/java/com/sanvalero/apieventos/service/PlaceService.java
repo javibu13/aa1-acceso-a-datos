@@ -51,7 +51,7 @@ public class PlaceService {
         return placeRepository.save(place);
     }
 
-    public Place updatePlace(Long id, Place place) {
+    public Place updatePlace(Long id, Place place) throws EntityNotFoundException {
         if (placeRepository.existsById(id)) {
             place.setId(id);
             return placeRepository.save(place);

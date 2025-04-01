@@ -74,7 +74,7 @@ public class PersonService {
         return modelMapper.map(createdPerson, PersonOutDTO.class);
     }
 
-    public PersonOutDTO updatePerson(Long id, Person person) {
+    public PersonOutDTO updatePerson(Long id, Person person) throws EntityNotFoundException {
         if (personRepository.existsById(id)) {
             person.setId(id);
             Person updatedPerson = personRepository.save(person);
