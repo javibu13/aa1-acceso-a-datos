@@ -35,8 +35,9 @@ gestor de Issues para los problemas/fallos que vayan surgiendo.
 
 ⬜ Securiza algunas de tus operaciones de la API con un token JWT.
 
-⬜ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información 
-de la base de datos.
+⬜ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos.
+
+⬜ Añade 3 operaciones que utilicen consultas JPQL para extraer la información de la base de datos
 
 ⬜ Añade al fichero de especificación de la API (OpenAPI 3.0) un par de ejemplos 
 para cada operación.

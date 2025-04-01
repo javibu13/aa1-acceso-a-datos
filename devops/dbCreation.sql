@@ -52,7 +52,7 @@ CREATE TABLE attendance (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     ticket_code VARCHAR(255) NOT NULL,
     seat_number INT,
-    ticketPrice FLOAT,
+    ticket_price FLOAT,
     checked_in BOOLEAN DEFAULT FALSE,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     person_id BIGINT NOT NULL,
