@@ -46,6 +46,7 @@ public class Person {
 
     @Column(nullable = false)
     @NotNull(message = "Age cannot be null")
+    @Min(value = 0, message = "Age must be greater than or equal to 0")
     private Integer age;
 
     @Column
