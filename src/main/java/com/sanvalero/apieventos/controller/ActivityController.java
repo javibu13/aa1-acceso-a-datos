@@ -21,6 +21,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,6 +84,17 @@ public class ActivityController {
         }
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Activity> partialUpdateActivity(@PathVariable Long id, @RequestBody ActivityInDTO activityInDTO) {
+        logger.info("Partially updating activity with id: {} to {}", id, activityInDTO);
+        Activity updatedActivity = activityService.partialUpdateActivity(id, activityInDTO);
+        if (updatedActivity != null) {
+            return new ResponseEntity<>(updatedActivity, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
         logger.info("Deleting activity with id: {}", id);
@@ -106,6 +118,15 @@ public class ActivityController {
     public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException dive) {
         logger.error("DataIntegrityViolationException: {}", dive.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), dive.getClass().getSimpleName(), "Error found in the activities request");
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleException(IllegalArgumentException iae) {
+        logger.error("IllegalArgumentException: {}", iae.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), iae.getClass().getSimpleName(), iae.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     

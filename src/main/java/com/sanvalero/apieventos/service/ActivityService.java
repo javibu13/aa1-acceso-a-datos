@@ -84,6 +84,49 @@ public class ActivityService {
         }
     }
 
+    public Activity partialUpdateActivity(Long id, ActivityInDTO activityInDTO) throws EntityNotFoundException, IllegalArgumentException {
+        Optional<Activity> existingActivity = activityRepository.findById(id);
+        if (existingActivity.isPresent()) {
+            Activity activity = existingActivity.get();
+            // Update only the fields that are present in the DTO
+            if (activityInDTO.getTitle() != null) {
+                if (activityInDTO.getTitle().isEmpty() ||activityInDTO.getTitle().length() > 255) {
+                    throw new IllegalArgumentException("Title cannot exceed 50 characters");
+                }
+                activity.setTitle(activityInDTO.getTitle());
+            }
+            if (activityInDTO.getDuration() != null) {
+                if (activityInDTO.getDuration() <= 0) {
+                    throw new IllegalArgumentException("Duration must be greater than 0");
+                }
+                activity.setDuration(activityInDTO.getDuration());
+            }
+            if (activityInDTO.getPrice() != null) {
+                if (activityInDTO.getPrice() < 0) {
+                    throw new IllegalArgumentException("Price cannot be negative");
+                }
+                activity.setPrice(activityInDTO.getPrice());
+            }
+            if (activityInDTO.getOpen() != null) {
+                activity.setOpen(activityInDTO.getOpen());
+            }
+            if (activityInDTO.getSchedule() != null) {
+                activity.setSchedule(activityInDTO.getSchedule());
+            }
+            if (activityInDTO.getConference() != null) {
+                // Check if the conference exists
+                Optional<Conference> conference = conferenceRepository.findById(activityInDTO.getConference());
+                if (conference.isEmpty()) {
+                    throw new EntityNotFoundException("Conference not found with ID: " + activityInDTO.getConference());
+                }
+                activity.setConference(conference.get());
+            }
+            return activityRepository.save(activity);
+        } else {
+            throw new EntityNotFoundException("Activity not found with ID: " + id);
+        }
+    }
+
     public void deleteActivity(Long id) {
         activityRepository.deleteById(id);
     }
