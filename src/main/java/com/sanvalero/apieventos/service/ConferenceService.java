@@ -105,6 +105,55 @@ public class ConferenceService {
         }
     }
 
+    public Conference partialUpdateConference(Long id, ConferenceInDTO conferenceInDTO) throws EntityNotFoundException, IllegalArgumentException {
+        Optional<Conference> existingConference = conferenceRepository.findById(id);
+        if (existingConference.isPresent()) {
+            Conference conference = existingConference.get();
+            // Update only the fields that are present in the DTO
+            if (conferenceInDTO.getName() != null) {
+                if (conferenceInDTO.getName().isEmpty() || conferenceInDTO.getName().length() > 100) {
+                    throw new IllegalArgumentException("Name cannot exceed 50 characters");
+                }
+                conference.setName(conferenceInDTO.getName());
+            }
+            if (conferenceInDTO.getCapacity() != null) {
+                if (conferenceInDTO.getCapacity() <= 0) {
+                    throw new IllegalArgumentException("Capacity must be greater than 0");
+                }
+                conference.setCapacity(conferenceInDTO.getCapacity());
+            }
+            if (conferenceInDTO.getBudget() != null) {
+                if (conferenceInDTO.getBudget() <= 0) {
+                    throw new IllegalArgumentException("Budget must be greater than 0");
+                }
+                conference.setBudget(conferenceInDTO.getBudget());
+            }
+            if (conferenceInDTO.getOnline() != null) {
+                conference.setOnline(conferenceInDTO.getOnline());
+            }
+            if (conferenceInDTO.getStartDate() != null) {
+                conference.setStartDate(conferenceInDTO.getStartDate());
+            }
+            if (conferenceInDTO.getPlace() != null) {
+                Optional<Place> place = placeRepository.findById(conferenceInDTO.getPlace());
+                if (place.isEmpty()) {
+                    throw new EntityNotFoundException("Place not found with id: " + conferenceInDTO.getPlace());
+                }
+                conference.setPlace(place.get());
+            }
+            if (conferenceInDTO.getOrganizer() != null) {
+                Optional<Person> organizer = personRepository.findById(conferenceInDTO.getOrganizer());
+                if (organizer.isEmpty()) {
+                    throw new EntityNotFoundException("Organizer not found with id: " + conferenceInDTO.getOrganizer());
+                }
+                conference.setOrganizer(organizer.get());
+            }
+            return conferenceRepository.save(conference);
+        } else {
+            throw new EntityNotFoundException("Conference not found with id: " + id);
+        }
+    }
+
     public void deleteConference(Long id) {
         conferenceRepository.deleteById(id);
     }

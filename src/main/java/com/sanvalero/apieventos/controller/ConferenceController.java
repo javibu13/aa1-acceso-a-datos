@@ -21,6 +21,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,6 +84,17 @@ public class ConferenceController {
         }
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Conference> partialUpdateConference(@PathVariable Long id, @RequestBody ConferenceInDTO conferenceInDTO) {
+        logger.info("Partially updating conference with id: {} to {}", id, conferenceInDTO);
+        Conference updatedConference = conferenceService.partialUpdateConference(id, conferenceInDTO);
+        if (updatedConference != null) {
+            return new ResponseEntity<>(updatedConference, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConference(@PathVariable Long id) {
         logger.info("Deleting conference with id: {}", id);
@@ -106,6 +118,15 @@ public class ConferenceController {
     public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException dive) {
         logger.error("DataIntegrityViolationException: {}", dive.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), dive.getClass().getSimpleName(), "Error found in the conferences request");
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleException(IllegalArgumentException iae) {
+        logger.error("IllegalArgumentException: {}", iae.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), iae.getClass().getSimpleName(), iae.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     
