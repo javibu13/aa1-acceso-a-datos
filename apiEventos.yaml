@@ -46,12 +46,44 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Person"
+              examples:
+                lista_completa:
+                  summary: Lista con varias personas
+                  value:
+                    - id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "correofalso123@apieventos.com"
+                      age: 28
+                      height: 1.75
+                      interests: "Tech, 3D, videogames, etc"
+                      birthDate: "1996-05-29"
+                      verified: true
+                    - id: 2
+                      firstName: "Montse"
+                      lastName: "García"
+                      email: "correofalso321@apieventos.com"
+                      age: 28
+                      height: 1.58
+                      interests: "Pixar, Disney, etc"
+                      birthDate: "1996-07-11"
+                      verified: false
+                lista_vacia:
+                  summary: No hay personas registradas
+                  value: []
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     post:
       summary: Add a new person
       operationId: createPerson
@@ -63,6 +95,31 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Person"
+            examples:
+              example1:
+                summary: Example of person 1
+                value:
+                  firstName: "Javier"
+                  lastName: "Sanz"
+                  pass: "0f3fde0103dd44077c040215a2fabd09a097aecc"
+                  email: "correofalso123@apieventos.com"
+                  age: 28
+                  height: 1.75
+                  interests: "Tech, 3D, videogames, etc"
+                  birthDate: "1996-05-29"
+                  verified: true
+              example2:
+                summary: Example of person 2
+                value:
+                  firstName: "Montse"
+                  lastName: "García"
+                  pass: "0f3fde0103dd44077c040215a2fabd09a097aecc"
+                  email: "correofalso321@apieventos.com"
+                  age: 28
+                  height: 1.58
+                  interests: "Pixar, Disney, etc"
+                  birthDate: "1996-07-11"
+                  verified: false
       responses:
         "201":
           description: Person added successfully
@@ -70,18 +127,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PersonWithoutPass"
+              examples:
+                example1:
+                  summary: Example of person 1
+                  value:
+                    id: 1
+                    firstName: "Javier"
+                    lastName: "Sanz"
+                    email: "correofalso123@apieventos.com"
+                    age: 28
+                    height: 1.75
+                    interests: "Tech, 3D, videogames, etc"
+                    birthDate: "1996-05-29"
+                    verified: true
+                example2:
+                  summary: Example of person 2
+                  value:
+                    id: 2
+                    firstName: "Montse"
+                    lastName: "García"
+                    email: "correofalso321@apieventos.com"
+                    age: 28
+                    height: 1.58
+                    interests: "Pixar, Disney, etc"
+                    birthDate: "1996-07-11"
+                    verified: false
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Height must be greater than or equal to 0]"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /persons/{id}:
     get:
@@ -103,18 +199,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PersonWithoutPass"
+              examples:
+                example1:
+                  summary: Example of person with id = 1
+                  value:
+                    id: 1
+                    firstName: "Javier"
+                    lastName: "Sanz"
+                    email: "correofalso123@apieventos.com"
+                    age: 28
+                    height: 1.75
+                    interests: "Tech, 3D, videogames, etc"
+                    birthDate: "1996-05-29"
+                    verified: true
+                example2:
+                  summary: Example of person with id = 2
+                  value:
+                    id: 2
+                    firstName: "Montse"
+                    lastName: "García"
+                    email: "correofalso321@apieventos.com"
+                    age: 28
+                    height: 1.58
+                    interests: "Pixar, Disney, etc"
+                    birthDate: "1996-07-11"
+                    verified: false
+
         "404":
           description: Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     put:
       summary: Update a person
       operationId: updatePerson
@@ -133,6 +269,31 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Person"
+            examples:
+              example1:
+                summary: Example of person with id = 1
+                value:
+                  firstName: "Javier"
+                  lastName: "Sanz"
+                  pass: "aaafdesss3dd44077c040215a2fabd09a097aecc"
+                  email: "correofalso123@apieventos.es"
+                  age: 30
+                  height: 1.80
+                  interests: "Tech, 3D, videogames."
+                  birthDate: "1996-05-29"
+                  verified: false
+              example2:
+                summary: Example of person with id = 2
+                value:
+                  firstName: "Montserrat"
+                  lastName: "García"
+                  pass: "aaaaae0103dd44077c040215a2fabd09a097aecc"
+                  email: "correofalso321@apieventos.com"
+                  age: 29
+                  height: 1.60
+                  interests: "Pixar, Disney, etc."
+                  birthDate: "1996-07-11"
+                  verified: true
       responses:
         "202":
           description: Person updated successfully
@@ -140,24 +301,70 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PersonWithoutPass"
+              examples:
+                example1:
+                  summary: Example of person with id = 1
+                  value:
+                    id: 1
+                    firstName: "Javier"
+                    lastName: "Sanz"
+                    email: "correofalso123@apieventos.es"
+                    age: 30
+                    height: 1.80
+                    interests: "Tech, 3D, videogames."
+                    birthDate: "1996-05-29"
+                    verified: false
+                example2:
+                  summary: Example of person with id = 2
+                  value:
+                    id: 2
+                    firstName: "Montserrat"
+                    lastName: "García"
+                    email: "correofalso321@apieventos.com"
+                    age: 29
+                    height: 1.60
+                    interests: "Pixar, Disney, etc."
+                    birthDate: "1996-07-11"
+                    verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Height must be greater than or equal to 0]"
         "404":
           description: Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     patch:
       summary: Partially update a person
       operationId: partialUpdatePerson
@@ -176,6 +383,16 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Person"
+            examples:
+              example1:
+                summary: Example modifing only the firstName of the person
+                value:
+                  firstName: "Javibu"
+              example2:
+                summary: Example modifing only the pass and email of the person
+                value:
+                  pass: "xyzfde0103dd44077c040215a2fabd09a097aecc"
+                  email: "test@test.es"
       responses:
         "202":
           description: Person partially updated successfully
@@ -183,24 +400,70 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PersonWithoutPass"
+              examples:
+                example1:
+                  summary: Example of person with id = 1
+                  value:
+                    id: 1
+                    firstName: "Javibu"
+                    lastName: "Sanz"
+                    email: "correofalso123@apieventos.es"
+                    age: 30
+                    height: 1.80
+                    interests: "Tech, 3D, videogames."
+                    birthDate: "1996-05-29"
+                    verified: false
+                example2:
+                  summary: Example of person with id = 2
+                  value:
+                    id: 2
+                    firstName: "Montserrat"
+                    lastName: "García"
+                    email: "test@test.es"
+                    age: 29
+                    height: 1.60
+                    interests: "Pixar, Disney, etc."
+                    birthDate: "1996-07-11"
+                    verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Height must be greater than or equal to 0]"
         "404":
           description: Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     delete:
       summary: Delete a person
       operationId: deletePerson
@@ -222,6 +485,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
 
   /persons/conferences/{conferenceId}:
     get:
@@ -245,18 +515,57 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PersonWithoutPass"
+              examples:
+                example1:
+                  summary: Example of persons registered for the conference with id = 1
+                  value:
+                    - id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "correofalso123@apieventos.com"
+                      age: 28
+                      height: 1.75
+                      interests: "Tech, 3D, videogames, etc"
+                      birthDate: "1996-05-29"
+                      verified: true
+                    - id: 2
+                      firstName: "Montse"
+                      lastName: "García"
+                      email: "correofalso321@apieventos.com"
+                      age: 28
+                      height: 1.58
+                      interests: "Pixar, Disney, etc"
+                      birthDate: "1996-07-11"
+                      verified: false
+                example2:
+                  summary: Example of persons registered for the conference with id = 2
+                  value: []
         "404":
           description: Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /places:
     get:
@@ -292,12 +601,42 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Place"
+              examples:
+                example1:
+                  summary: Example of places with id = 1 and id = 2
+                  value:
+                    - id: 1
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibrán"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    - id: 2
+                      name: "Palacio de Congresos de Zaragoza"
+                      address: "Calle José María Lacasa"
+                      capacity: 1000
+                      area: 2000.0
+                      inaugurationDate: "2010-05-15"
+                      hasParking: true
+                      equipment: "Proyector, Pantalla, Sonido"
+                example2:
+                  summary: Example of empty list of places
+                  value: []
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     post:
       summary: Add a new place
       operationId: createPlace
@@ -309,6 +648,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Place"
+            examples:
+              example1:
+                summary: Example of place 1
+                value:
+                  name: "Puerto Venecia"
+                  address: "Calle Teatro Malibrán"
+                  capacity: 30
+                  area: 400.0
+                  inaugurationDate: "2015-02-01"
+                  hasParking: false
+                  equipment: ""
+              example2:
+                summary: Example of place 2
+                value:
+                  name: "Palacio de Congresos de Zaragoza"
+                  address: "Calle José María Lacasa"
+                  capacity: 1000
+                  area: 2000.0
+                  inaugurationDate: "2010-05-15"
+                  hasParking: true
+                  equipment: "Proyector, Pantalla, Sonido"
       responses:
         "201":
           description: Place added successfully
@@ -316,18 +676,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Place"
+              examples:
+                example1:
+                  summary: Example of place 1
+                  value:
+                    id: 1
+                    name: "Puerto Venecia"
+                    address: "Calle Teatro Malibrán"
+                    capacity: 30
+                    area: 400.0
+                    inaugurationDate: "2015-02-01"
+                    hasParking: false
+                    equipment: ""
+                example2:
+                  summary: Example of place 2
+                  value:
+                    id: 2
+                    name: "Palacio de Congresos de Zaragoza"
+                    address: "Calle José María Lacasa"
+                    capacity: 1000
+                    area: 2000.0
+                    inaugurationDate: "2010-05-15"
+                    hasParking: true
+                    equipment: "Proyector, Pantalla, Sonido"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Area must be greater than or equal to 0]"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /places/{id}:
     get:
@@ -349,18 +746,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Place"
+              examples:
+                example1:
+                  summary: Example of place with id = 1
+                  value:
+                    id: 1
+                    name: "Puerto Venecia"
+                    address: "Calle Teatro Malibrán"
+                    capacity: 30
+                    area: 400.0
+                    inaugurationDate: "2015-02-01"
+                    hasParking: false
+                    equipment: ""
+                example2:
+                  summary: Example of place with id = 2
+                  value:
+                    id: 2
+                    name: "Palacio de Congresos de Zaragoza"
+                    address: "Calle José María Lacasa"
+                    capacity: 1000
+                    area: 2000.0
+                    inaugurationDate: "2010-05-15"
+                    hasParking: true
+                    equipment: "Proyector, Pantalla, Sonido"
         "404":
           description: Place not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Place not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     put:
       summary: Update a place
       operationId: updatePlace
@@ -379,6 +813,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Place"
+            examples:
+              example1:
+                summary: Example of place with id = 1
+                value:
+                  name: "Puerto Venecia"
+                  address: "Calle Teatro Malibrán"
+                  capacity: 30
+                  area: 400.0
+                  inaugurationDate: "2015-02-01"
+                  hasParking: false
+                  equipment: ""
+              example2:
+                summary: Example of place with id = 2
+                value:
+                  name: "Palacio de Congresos de Zaragoza"
+                  address: "Calle José María Lacasa"
+                  capacity: 1000
+                  area: 2000.0
+                  inaugurationDate: "2010-05-15"
+                  hasParking: true
+                  equipment: "Proyector, Pantalla, Sonido"
       responses:
         "202":
           description: Place updated successfully
@@ -386,24 +841,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Place"
+              examples:
+                example1:
+                  summary: Example of place with id = 1
+                  value:
+                    id: 1
+                    name: "Puerto Venecia"
+                    address: "Calle Teatro Malibrán"
+                    capacity: 30
+                    area: 400.0
+                    inaugurationDate: "2015-02-01"
+                    hasParking: false
+                    equipment: ""
+                example2:
+                  summary: Example of place with id = 2
+                  value:
+                    id: 2
+                    name: "Palacio de Congresos de Zaragoza"
+                    address: "Calle José María Lacasa"
+                    capacity: 1000
+                    area: 2000.0
+                    inaugurationDate: "2010-05-15"
+                    hasParking: true
+                    equipment: "Proyector, Pantalla, Sonido"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Area must be greater than or equal to 0]"
         "404":
           description: Place not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Place not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     patch:
       summary: Partially update a place
       operationId: partialUpdatePlace
@@ -422,6 +921,16 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Place"
+            examples:
+              example1:
+                summary: Example modifing only the name of the place
+                value:
+                  name: "Puerto Venecia 2.0"
+              example2:
+                summary: Example modifing only the hasParking and equipment of the place
+                value:
+                  hasParking: true
+                  equipment: "Proyector, Pantalla, Sonido, Wifi"
       responses:
         "202":
           description: Place partially updated successfully
@@ -429,24 +938,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Place"
+              examples:
+                example1:
+                  summary: Example of place with id = 1
+                  value:
+                    id: 1
+                    name: "Puerto Venecia 2.0"
+                    address: "Calle Teatro Malibrán"
+                    capacity: 30
+                    area: 400.0
+                    inaugurationDate: "2015-02-01"
+                    hasParking: false
+                    equipment: ""
+                example2:
+                  summary: Example of place with id = 2
+                  value:
+                    id: 2
+                    name: "Palacio de Congresos de Zaragoza"
+                    address: "Calle José María Lacasa"
+                    capacity: 1000
+                    area: 2000.0
+                    inaugurationDate: "2010-05-15"
+                    hasParking: true
+                    equipment: "Proyector, Pantalla, Sonido, Wifi"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Area must be greater than or equal to 0]"
         "404":
           description: Place not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Place not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     delete:
       summary: Delete a place
       operationId: deletePlace
@@ -468,6 +1021,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /conferences:
     get:
@@ -503,12 +1063,51 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conferences
+                  value:
+                    - id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of empty list of conferences
+                  value: []
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     post:
       summary: Add a new conference
       operationId: createConference
@@ -520,6 +1119,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Conference"
+            examples:
+              example1:
+                summary: Example of conference 1
+                value:
+                  name: "3D Printing Day"
+                  capacity: 40
+                  budget: 2800.0
+                  online: true
+                  startDate: "2025-07-11"
+                  placeId: 1
+                  organizerId: 1
+              example2:
+                summary: Example of conference 2
+                value:
+                  name: "3D Printing Day"
+                  capacity: 40
+                  budget: 2800.0
+                  online: true
+                  startDate: "2025-07-11"
+                  placeId: 2
+                  organizerId: 2
       responses:
         "201":
           description: Conference added successfully
@@ -527,24 +1147,102 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conference 1
+                  value:
+                    id: 1
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 1
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
+                example2:
+                  summary: Example of conference 2
+                  value:
+                    id: 2
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 2
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 2
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Budget must be greater than or equal to 0]"
         "404":
           description: Place or Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Place or Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   /conferences/{id}:
     get:
       summary: Get a conference by ID
@@ -565,18 +1263,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conference with id = 1
+                  value:
+                    id: 1
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 1
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
+                example2:
+                  summary: Example of conference with id = 2
+                  value:
+                    id: 2
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 2
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 2
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
+                
         "404":
           description: Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     put:
       summary: Update a conference
       operationId: updateConference
@@ -595,6 +1365,27 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Conference"
+            examples:
+              example1:
+                summary: Example of conference with id = 1
+                value:
+                  name: "3D Printing Day"
+                  capacity: 40
+                  budget: 2800.0
+                  online: true
+                  startDate: "2025-07-11"
+                  placeId: 1
+                  organizerId: 1
+              example2:
+                summary: Example of conference with id = 2
+                value:
+                  name: "3D Printing Day"
+                  capacity: 40
+                  budget: 2800.0
+                  online: true
+                  startDate: "2025-07-11"
+                  placeId: 2
+                  organizerId: 2
       responses:
         "202":
           description: Conference updated successfully
@@ -602,24 +1393,102 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conference with id = 1
+                  value:
+                    id: 1
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 1
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
+                example2:
+                  summary: Example of conference with id = 2
+                  value:
+                    id: 2
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 2
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 2
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Budget must be greater than or equal to 0]"
         "404":
           description: Conference not found or Place or Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found or Place or Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     patch:
       summary: Partially update a conference
       operationId: partialUpdateConference
@@ -638,6 +1507,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Conference"
+            examples:
+              example1:
+                summary: Example modifing only the name of the conference
+                value:
+                  name: "3D Printing Day 2.0"
+              example2:
+                summary: Example modifing only the online status of the conference
+                value:
+                  online: false
       responses:
         "202":
           description: Conference partially updated successfully
@@ -645,24 +1523,102 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conference with id = 1
+                  value:
+                    id: 1
+                    name: "3D Printing Day 2.0"
+                    capacity: 40
+                    budget: 2800.0
+                    online: true
+                    startDate: "2025-07-11"
+                    place:
+                      id: 1
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 1
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
+                example2:
+                  summary: Example of conference with id = 2
+                  value:
+                    id: 2
+                    name: "3D Printing Day"
+                    capacity: 40
+                    budget: 2800.0
+                    online: false
+                    startDate: "2025-07-11"
+                    place:
+                      id: 2
+                      name: "Puerto Venecia"
+                      address: "Calle Teatro Malibránnnnnn"
+                      capacity: 30
+                      area: 400.0
+                      inaugurationDate: "2015-02-01"
+                      hasParking: false
+                      equipment: ""
+                    organizer:
+                      id: 2
+                      firstName: "Javier"
+                      lastName: "Sanz"
+                      email: "2javiersanzmoline@gmail.com"
+                      age: 29
+                      height: 1.76
+                      interests: "Tech, 3D, videogames."
+                      birthDate: "1996-05-29"
+                      verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Budget must be greater than or equal to 0]"
         "404":
           description: Conference not found or Place or Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found or Place or Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     delete:
       summary: Delete a conference
       operationId: deleteConference
@@ -684,6 +1640,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /conferences/persons/{personId}:
     get:
@@ -707,18 +1670,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conferences for a person
+                  value:
+                    - id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "404":
           description: Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /conferences/organizers/{organizerId}:
     get:
@@ -742,18 +1748,61 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Conference"
+              examples:
+                example1:
+                  summary: Example of conferences for a person
+                  value:
+                    - id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "404":
           description: Person not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
 
   /activities:
     get:
@@ -789,12 +1838,55 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activities
+                  value:
+                    - id: 1
+                      title: "Calibración y limpieza"
+                      duration: 90
+                      price: 700.0
+                      open: false
+                      schedule: "2025-05-29T10:00:00"
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     post:
       summary: Add a new activity
       operationId: createActivity
@@ -806,6 +1898,25 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Activity"
+            examples:
+              example1:
+                summary: Example of activity 1
+                value:
+                  title: "Calibración y limpieza"
+                  duration: 90
+                  price: 700.0
+                  open: false
+                  schedule: "2025-05-29T10:00:00"
+                  conferenceId: 1
+              example2:
+                summary: Example of activity 2
+                value:
+                  title: "Calibración y limpieza (Avanzado)"
+                  duration: 120
+                  price: 900.0
+                  open: false
+                  schedule: "2025-05-29T10:00:00"
+                  conferenceId: 2
       responses:
         "201":
           description: Activity added successfully
@@ -813,24 +1924,116 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activity 1
+                  value:
+                    id: 1
+                    title: "Calibración y limpieza"
+                    duration: 90
+                    price: 700.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of activity 2
+                  value:
+                    id: 2
+                    title: "Calibración y limpieza (Avanzado)"
+                    duration: 120
+                    price: 900.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Price must be greater than or equal to 0]"
         "404":
           description: Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /activities/{id}:
     get:
@@ -852,18 +2055,103 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activity with id = 1
+                  value:
+                    id: 1
+                    title: "Calibración y limpieza"
+                    duration: 90
+                    price: 700.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of activity with id = 2
+                  value:
+                    id: 2
+                    title: "Calibración y limpieza (Avanzado)"
+                    duration: 120
+                    price: 900.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "404":
           description: Activity not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Activity not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     put:
       summary: Update an activity
       operationId: updateActivity
@@ -882,6 +2170,25 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Activity"
+            examples:
+              example1:
+                summary: Example of activity with id = 1
+                value:
+                  title: "Calibración y limpieza"
+                  duration: 90
+                  price: 700.0
+                  open: false
+                  schedule: "2025-05-29T10:00:00"
+                  conferenceId: 1
+              example2:
+                summary: Example of activity with id = 2
+                value:
+                  title: "Calibración y limpieza (Avanzado)"
+                  duration: 120
+                  price: 900.0
+                  open: false
+                  schedule: "2025-05-29T10:00:00"
+                  conferenceId: 2
       responses:
         "202":
           description: Activity updated successfully
@@ -889,24 +2196,116 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activity 1
+                  value:
+                    id: 1
+                    title: "Calibración y limpieza"
+                    duration: 90
+                    price: 700.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of activity 2
+                  value:
+                    id: 2
+                    title: "Calibración y limpieza (Avanzado)"
+                    duration: 120
+                    price: 900.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Price must be greater than or equal to 0]"
         "404":
           description: Activity not found or Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Activity not found or Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     patch:
       summary: Partially update an activity
       operationId: partialUpdateActivity
@@ -925,6 +2324,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Activity"
+            examples:
+              example1:
+                summary: Example modifing only the title of the activity
+                value:
+                  title: "Calibración y mantenimiento"
+              example2:
+                summary: Example modifing only the open status of the activity
+                value:
+                  open: true
       responses:
         "202":
           description: Activity partially updated successfully
@@ -932,24 +2340,116 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activity 1
+                  value:
+                    id: 1
+                    title: "Calibración y mantenimiento"
+                    duration: 90
+                    price: 700.0
+                    open: false
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of activity 2
+                  value:
+                    id: 2
+                    title: "Calibración y limpieza (Avanzado)"
+                    duration: 120
+                    price: 900.0
+                    open: true
+                    schedule: "2025-05-29T10:00:00"
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Price must be greater than or equal to 0]"
         "404":
           description: Activity not found or Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Activity not found or Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     delete:
       summary: Delete an activity
       operationId: deleteActivity
@@ -971,6 +2471,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
 
   /activities/conferences/{conferenceId}:
     get:
@@ -994,18 +2501,100 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Activity"
+              examples:
+                example1:
+                  summary: Example of activity 1
+                  value:
+                    - id: 1
+                      title: "Calibración y limpieza"
+                      duration: 90
+                      price: 700.0
+                      open: false
+                      schedule: "2025-05-29T10:00:00"
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
+                    - id: 2
+                      title: "Calibración y limpieza"
+                      duration: 90
+                      price: 700.0
+                      open: false
+                      schedule: "2025-05-29T10:00:00"
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
         "404":
           description: Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /attendance:
     get:
@@ -1041,12 +2630,65 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Attendance"
+              examples:
+                example1:
+                  summary: Example of attendance record 1
+                  value:
+                    - id: 1
+                      ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                      seatNumber: 3
+                      ticketPrice: 15.0
+                      checkedIn: true
+                      registrationDate: "2025-04-02T00:23:46"
+                      person:
+                        id: 2
+                        firstName: "Mon"
+                        lastName: "García"
+                        email: "montserratgarciaenguita@gmail.com"
+                        age: 28
+                        height: 1.58
+                        interests: "Animación, Pixar, etc."
+                        birthDate: "1996-07-11"
+                        verified: false
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     post:
       summary: Add a new attendance record
       operationId: createAttendance
@@ -1058,6 +2700,23 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Attendance"
+            examples:
+              example1:
+                summary: Example of attendance record 1
+                value:
+                  seatNumber: 3
+                  ticketPrice: 15.0
+                  checkedIn: true
+                  personId: 2
+                  conferenceId: 1
+              example2:
+                summary: Example of attendance record 2
+                value:
+                  seatNumber: 5
+                  ticketPrice: 5.0
+                  checkedIn: true
+                  personId: 2
+                  conferenceId: 1
       responses:
         "201":
           description: Attendance record added successfully
@@ -1065,24 +2724,136 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Attendance"
+              examples:
+                example1:
+                  summary: Example of attendance record 1
+                  value:
+                    id: 1
+                    ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                    seatNumber: 3
+                    ticketPrice: 15.0
+                    checkedIn: true
+                    registrationDate: "2025-04-02T00:23:46"
+                    person:
+                      id: 2
+                      firstName: "Mon"
+                      lastName: "García"
+                      email: "montserratgarciaenguita@gmail.com"
+                      age: 28
+                      height: 1.58
+                      interests: "Animación, Pixar, etc."
+                      birthDate: "1996-07-11"
+                      verified: false
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
+                example2:
+                  summary: Example of attendance record 2
+                  value:
+                    id: 2
+                    ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                    seatNumber: 5
+                    ticketPrice: 5.0
+                    checkedIn: true
+                    registrationDate: "2025-04-02T00:23:46"
+                    person:
+                      id: 2
+                      firstName: "Mon"
+                      lastName: "García"
+                      email: "montserratgarciaenguita@gmail.com"
+                      age: 28
+                      height: 1.58
+                      interests: "Animación, Pixar, etc."
+                      birthDate: "1996-07-11"
+                      verified: false
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Seat number must be greater than or equal to 0]"
         "404":
           description: Person or Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Person or Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
   
   /attendance/{id}:
     get:
@@ -1104,18 +2875,78 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Attendance"
+              examples:
+                example1:
+                  summary: Example of attendance record 1
+                  value:
+                    id: 1
+                    ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                    seatNumber: 3
+                    ticketPrice: 15.0
+                    checkedIn: true
+                    registrationDate: "2025-04-02T00:23:46"
+                    person:
+                      id: 2
+                      firstName: "Mon"
+                      lastName: "García"
+                      email: "montserratgarciaenguita@gmail.com"
+                      age: 28
+                      height: 1.58
+                      interests: "Animación, Pixar, etc."
+                      birthDate: "1996-07-11"
+                      verified: false
+                    conference:
+                      id: 1
+                      name: "3D Printing Day"
+                      capacity: 40
+                      budget: 2800.0
+                      online: true
+                      startDate: "2025-07-11"
+                      place:
+                        id: 1
+                        name: "Puerto Venecia"
+                        address: "Calle Teatro Malibránnnnnn"
+                        capacity: 30
+                        area: 400.0
+                        inaugurationDate: "2015-02-01"
+                        hasParking: false
+                        equipment: ""
+                      organizer:
+                        id: 1
+                        firstName: "Javier"
+                        lastName: "Sanz"
+                        email: "2javiersanzmoline@gmail.com"
+                        age: 29
+                        height: 1.76
+                        interests: "Tech, 3D, videogames."
+                        birthDate: "1996-05-29"
+                        verified: true
         "404":
           description: Attendance record not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Attendance record not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     put:
       summary: Update an attendance record
       operationId: updateAttendance
@@ -1134,6 +2965,23 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Attendance"
+            examples:
+              example1:
+                summary: Example of attendance record 1
+                value:
+                  seatNumber: 3
+                  ticketPrice: 15.0
+                  checkedIn: true
+                  personId: 2
+                  conferenceId: 1
+              example2:
+                summary: Example of attendance record 2
+                value:
+                  seatNumber: 5
+                  ticketPrice: 5.0
+                  checkedIn: true
+                  personId: 2
+                  conferenceId: 1
       responses:
         "202":
           description: Attendance record updated successfully
@@ -1141,24 +2989,136 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Attendance"
+              examples:
+                example1:
+                    summary: Example of attendance record 1
+                    value:
+                      id: 1
+                      ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                      seatNumber: 3
+                      ticketPrice: 15.0
+                      checkedIn: true
+                      registrationDate: "2025-04-02T00:23:46"
+                      person:
+                        id: 2
+                        firstName: "Mon"
+                        lastName: "García"
+                        email: "montserratgarciaenguita@gmail.com"
+                        age: 28
+                        height: 1.58
+                        interests: "Animación, Pixar, etc."
+                        birthDate: "1996-07-11"
+                        verified: false
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
+                example2:
+                    summary: Example of attendance record 1
+                    value:
+                      id: 2
+                      ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                      seatNumber: 5
+                      ticketPrice: 5.0
+                      checkedIn: true
+                      registrationDate: "2025-04-02T00:23:46"
+                      person:
+                        id: 2
+                        firstName: "Mon"
+                        lastName: "García"
+                        email: "montserratgarciaenguita@gmail.com"
+                        age: 28
+                        height: 1.58
+                        interests: "Animación, Pixar, etc."
+                        birthDate: "1996-07-11"
+                        verified: false
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Seat number must be greater than or equal to 0]"
         "404":
           description: Attendance record not found or Person or Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Attendance record not found or Person or Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     patch:
       summary: Partially update an attendance record
       operationId: partialUpdateAttendance
@@ -1177,6 +3137,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Attendance"
+            examples:
+              example1:
+                summary: Example modifing only the checkedIn status of the attendance record
+                value:
+                  checkedIn: true
+              example2:
+                summary: Example modifing only the ticketPrice of the attendance record
+                value:
+                  ticketPrice: 20.0
       responses:
         "202":
           description: Attendance record partially updated successfully
@@ -1184,24 +3153,136 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Attendance"
+              examples:
+                example1:
+                    summary: Example of attendance record 1
+                    value:
+                      id: 1
+                      ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                      seatNumber: 3
+                      ticketPrice: 15.0
+                      checkedIn: true
+                      registrationDate: "2025-04-02T00:23:46"
+                      person:
+                        id: 2
+                        firstName: "Mon"
+                        lastName: "García"
+                        email: "montserratgarciaenguita@gmail.com"
+                        age: 28
+                        height: 1.58
+                        interests: "Animación, Pixar, etc."
+                        birthDate: "1996-07-11"
+                        verified: false
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
+                example2:
+                    summary: Example of attendance record 1
+                    value:
+                      id: 2
+                      ticketCode: "decc4d45-ce13-4925-8675-b89382ed255b"
+                      seatNumber: 5
+                      ticketPrice: 2.0
+                      checkedIn: true
+                      registrationDate: "2025-04-02T00:23:46"
+                      person:
+                        id: 2
+                        firstName: "Mon"
+                        lastName: "García"
+                        email: "montserratgarciaenguita@gmail.com"
+                        age: 28
+                        height: 1.58
+                        interests: "Animación, Pixar, etc."
+                        birthDate: "1996-07-11"
+                        verified: false
+                      conference:
+                        id: 1
+                        name: "3D Printing Day"
+                        capacity: 40
+                        budget: 2800.0
+                        online: true
+                        startDate: "2025-07-11"
+                        place:
+                          id: 1
+                          name: "Puerto Venecia"
+                          address: "Calle Teatro Malibránnnnnn"
+                          capacity: 30
+                          area: 400.0
+                          inaugurationDate: "2015-02-01"
+                          hasParking: false
+                          equipment: ""
+                        organizer:
+                          id: 1
+                          firstName: "Javier"
+                          lastName: "Sanz"
+                          email: "2javiersanzmoline@gmail.com"
+                          age: 29
+                          height: 1.76
+                          interests: "Tech, 3D, videogames."
+                          birthDate: "1996-05-29"
+                          verified: true
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 400
+                    error: "MethodArgumentNotValidException"
+                    message: "[Ticket price must be greater than or equal to 0]"
         "404":
           description: Attendance record not found or Person or Conference not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 404
+                    error: "EntityNotFoundException"
+                    message: "Attendance record not found or Person or Conference not found"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
     delete:
       summary: Delete an attendance record
       operationId: deleteAttendance
@@ -1223,6 +3304,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Example of error response
+                  value:
+                    status: 500
+                    error: "DataAccessResourceFailureException"
+                    message: "An unexpected internal error occurred"
 
 components:
   schemas:

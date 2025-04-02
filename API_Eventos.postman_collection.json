@@ -1,0 +1,918 @@
+{
+	"info": {
+		"_postman_id": "05039617-9c70-4d9e-bd35-35c6e6efee18",
+		"name": "API_Eventos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43611281",
+		"_collection_link": "https://javiersanz-5654809.postman.co/workspace/Javier-Sanz's-Workspace~3841216c-9712-4abf-808c-ea951556907c/collection/43611281-05039617-9c70-4d9e-bd35-35c6e6efee18?action=share&source=collection_link&creator=43611281"
+	},
+	"item": [
+		{
+			"name": "persons",
+			"item": [
+				{
+					"name": "persons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons?firstName=Javier&age=29&verified=true",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "Javier"
+								},
+								{
+									"key": "age",
+									"value": "29"
+								},
+								{
+									"key": "verified",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "persons",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 28,\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personsById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"2javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 29,\r\n    \"height\": 1.76,\r\n    \"interests\": \"Tech, 3D, videogames.\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personsById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pass\": \"aaafde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 35\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personsById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons/4",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personsByConferenceId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/persons/conferences/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"persons",
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "places",
+			"item": [
+				{
+					"name": "places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places?minCapacity=25&maxCapacity=75&hasParking=true",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places"
+							],
+							"query": [
+								{
+									"key": "minCapacity",
+									"value": "25"
+								},
+								{
+									"key": "maxCapacity",
+									"value": "75"
+								},
+								{
+									"key": "hasParking",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "placesById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "places",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": 50,\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": true,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "placesById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": 25,\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "placesById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\": 30,\r\n    \"hasParking\": false,\r\n    \"equipment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "placesById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/places/2",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"places",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "conferences",
+			"item": [
+				{
+					"name": "conferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences?minCapacity=25&maxCapacity=75&isOnline=true",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences"
+							],
+							"query": [
+								{
+									"key": "minCapacity",
+									"value": "25"
+								},
+								{
+									"key": "maxCapacity",
+									"value": "75"
+								},
+								{
+									"key": "isOnline",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferenceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferences",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferencesById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 60,\r\n    \"budget\": 3500,\r\n    \"online\": true,\r\n    \"startDate\": \"2025-07-11\",\r\n    \"place\": 1,\r\n    \"organizer\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferencesById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"online\": true,\r\n    \"startDate\": \"2025-07-11\",\r\n    \"organizer\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferencesById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/2",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferencesByPersonId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/persons/2",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"persons",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "conferencesByOrganizerId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/conferences/organizers/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"conferences",
+								"organizers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "activities",
+			"item": [
+				{
+					"name": "activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities?minDuration=25&maxDuration=75&isOpen=true",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities"
+							],
+							"query": [
+								{
+									"key": "minDuration",
+									"value": "25"
+								},
+								{
+									"key": "maxDuration",
+									"value": "75"
+								},
+								{
+									"key": "isOpen",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activityById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activities",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activityById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Calibración y limpieza (Avanzado)\",\r\n    \"duration\": 90,\r\n    \"price\": 700,\r\n    \"open\": true,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activityById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activityById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities/2",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activitiesByConferenceId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/activities/conferences/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"activities",
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "attendances",
+			"item": [
+				{
+					"name": "attendances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances"
+							],
+							"query": [
+								{
+									"key": "minSeatNumber",
+									"value": "25",
+									"disabled": true
+								},
+								{
+									"key": "maxSeatNumber",
+									"value": "75",
+									"disabled": true
+								},
+								{
+									"key": "isCheckedIn",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendances",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seatNumber\": 3,\r\n    \"ticketPrice\": 15,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceById",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkedIn\": true,\r\n    \"person\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances/1",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{ip_address}}:{{port}}/attendances/2",
+							"protocol": "http",
+							"host": [
+								"{{ip_address}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"attendances",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
