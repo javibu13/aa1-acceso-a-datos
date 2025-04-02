@@ -48,7 +48,7 @@ public class ActivityController {
                                                     @RequestParam(required = false) Integer maxDuration,
                                                     @RequestParam(required = false) Boolean isOpen) {
         if (minDuration != null || maxDuration != null || isOpen != null) {
-            logger.info("Filtering activities by minCapacity: {}, maxCapacity: {}, isOpen: {}", minDuration, maxDuration, isOpen);
+            logger.info("Filtering activities by minDuration: {}, maxDuration: {}, isOpen: {}", minDuration, maxDuration, isOpen);
             List<Activity> activities = activityService.getActivitiesByFilters(minDuration, maxDuration, isOpen);
             return new ResponseEntity<>(activities, HttpStatus.OK);
         } else {
