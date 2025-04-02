@@ -27,7 +27,7 @@ puedan indicar hasta 3 campos diferentes (solo aplicable para operaciones GET).
 desarrolladas.
 
 ## Requisitos opcionales
-⬜ Añade una operación PATCH para cada una de las clases del modelo.
+✅ Añade una operación PATCH para cada una de las clases del modelo.
 
 ⬜ Utiliza la herramienta Git (y GitHub) durante todo el desarrollo de la API. Escribe 
 el fichero README.md para explicar cómo poner en marcha el proyecto. Utiliza el 
