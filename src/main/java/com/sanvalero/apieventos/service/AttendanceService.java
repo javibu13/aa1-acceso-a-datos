@@ -129,6 +129,49 @@ public class AttendanceService {
         }
     }
 
+    public AttendanceOutDTO partialUpdateAttendance(Long id, AttendanceInDTO attendanceInDTO) throws EntityNotFoundException, IllegalArgumentException {
+        Optional<Attendance> existingAttendance = attendanceRepository.findById(id);
+        if (existingAttendance.isPresent()) {
+            Attendance attendance = existingAttendance.get();
+            if (attendanceInDTO.getSeatNumber() != null) {
+                if (attendanceInDTO.getSeatNumber() < 0) {
+                    throw new IllegalArgumentException("Seat number cannot be negative");
+                }
+                attendance.setSeatNumber(attendanceInDTO.getSeatNumber());
+            }
+            if (attendanceInDTO.getTicketPrice() != null) {
+                if (attendanceInDTO.getTicketPrice() < 0) {
+                    throw new IllegalArgumentException("Ticket price cannot be negative");
+                }
+                attendance.setTicketPrice(attendanceInDTO.getTicketPrice());
+            }
+            if (attendanceInDTO.getCheckedIn() != null) {
+                attendance.setCheckedIn(attendanceInDTO.getCheckedIn());
+            }
+            if (attendanceInDTO.getPerson() != null) {
+                Optional<Person> person = personRepository.findById(attendanceInDTO.getPerson());
+                if (person.isEmpty()) {
+                    throw new EntityNotFoundException("Person not found with ID: " + attendanceInDTO.getPerson());
+                }
+                attendance.setPerson(person.get());
+            }
+            if (attendanceInDTO.getConference() != null) {
+                Optional<Conference> conference = conferenceRepository.findById(attendanceInDTO.getConference());
+                if (conference.isEmpty()) {
+                    throw new EntityNotFoundException("Conference not found with ID: " + attendanceInDTO.getConference());
+                }
+                attendance.setConference(conference.get());
+            }
+            Attendance attendanceSaved = attendanceRepository.save(attendance);
+            AttendanceOutDTO attendanceOutDTO = modelMapper.map(attendanceSaved, AttendanceOutDTO.class);
+            PersonOutDTO personOutDTO = modelMapper.map(attendanceSaved.getPerson(), PersonOutDTO.class);
+            attendanceOutDTO.setPerson(personOutDTO);
+            return attendanceOutDTO;
+        } else {
+            throw new EntityNotFoundException("Attendance not found with ID: " + id);
+        }
+    }
+
     public void deleteAttendance(Long id) {
         attendanceRepository.deleteById(id);
     }
