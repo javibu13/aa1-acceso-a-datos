@@ -5,7 +5,6 @@ import com.sanvalero.apieventos.domain.Conference;
 import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.domain.Place;
 import com.sanvalero.apieventos.dto.ConferenceInDTO;
-import com.sanvalero.apieventos.dto.PersonOutDTO;
 import com.sanvalero.apieventos.repository.AttendanceRepository;
 import com.sanvalero.apieventos.repository.ConferenceRepository;
 import com.sanvalero.apieventos.repository.PersonRepository;
