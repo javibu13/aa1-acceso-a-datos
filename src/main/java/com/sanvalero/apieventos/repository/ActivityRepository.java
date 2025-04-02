@@ -22,4 +22,6 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
     List<Activity> findByDurationBetweenAndOpen(Integer minDuration, Integer maxDuration, Boolean isOpen);
     // Method to find an activity by ID
     Optional<Activity> findById(Long id);
+    // Method to find all activities by conference ID
+    List<Activity> findByConferenceId(Long conferenceId);
 }

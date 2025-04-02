@@ -130,4 +130,12 @@ public class ActivityService {
     public void deleteActivity(Long id) {
         activityRepository.deleteById(id);
     }
+
+    public List<Activity> getActivitiesByConferenceId(Long id) throws EntityNotFoundException {
+        // Check if the conference exists
+        if (!conferenceRepository.existsById(id)) {
+            throw new EntityNotFoundException("Conference not found with ID: " + id);
+        }
+        return activityRepository.findByConferenceId(id);
+    }
 }
