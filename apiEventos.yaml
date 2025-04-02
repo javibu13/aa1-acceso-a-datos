@@ -1,0 +1,1421 @@
+openapi: 3.0.3
+info:
+  title: Eventos API
+  description: API for managing events, activities, and participants
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@apieventos.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /persons:
+    get:
+      summary: Get all persons (optionally filter by firstName, age or verified)
+      operationId: getAllPersons
+      tags:
+        - Persons
+      parameters:
+        - name: firstName
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter persons by first name
+        - name: age
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter persons by age
+        - name: verified
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter persons by verification status
+      responses:
+        "200":
+          description: A list of persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Person"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      summary: Add a new person
+      operationId: createPerson
+      tags:
+        - Persons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: Person added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonWithoutPass"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /persons/{id}:
+    get:
+      summary: Get a person by ID
+      operationId: getPersonById
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the person to retrieve
+      responses:
+        "200":
+          description: Person found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonWithoutPass"
+        "404":
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      summary: Update a person
+      operationId: updatePerson
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the person to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "202":
+          description: Person updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonWithoutPass"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      summary: Partially update a person
+      operationId: partialUpdatePerson
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the person to partially update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "202":
+          description: Person partially updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonWithoutPass"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete a person
+      operationId: deletePerson
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the person to delete
+      responses:
+        "202":
+          description: Person deleted successfully
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /persons/conferences/{conferenceId}:
+    get:
+      summary: Get all persons registered for a conference
+      operationId: getPersonsByConferenceId
+      tags:
+        - Persons
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to filter persons by
+      responses:
+        "200":
+          description: A list of persons registered for the conference
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonWithoutPass"
+        "404":
+          description: Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /places:
+    get:
+      summary: Get all places (optionally filter by minCapacity, maxCapacity or hasParking)
+      operationId: getAllPlaces
+      tags:
+        - Places
+      parameters:
+        - name: minCapacity
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter places by minimum capacity
+        - name: maxCapacity
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter places by maximum capacity
+        - name: hasParking
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter places by parking availability
+      responses:
+        "200":
+          description: A list of places
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Place"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      summary: Add a new place
+      operationId: createPlace
+      tags:
+        - Places
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Place"
+      responses:
+        "201":
+          description: Place added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Place"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /places/{id}:
+    get:
+      summary: Get a place by ID
+      operationId: getPlaceById
+      tags:
+        - Places
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the place to retrieve
+      responses:
+        "200":
+          description: Place found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Place"
+        "404":
+          description: Place not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      summary: Update a place
+      operationId: updatePlace
+      tags:
+        - Places
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the place to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Place"
+      responses:
+        "202":
+          description: Place updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Place"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Place not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      summary: Partially update a place
+      operationId: partialUpdatePlace
+      tags:
+        - Places
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the place to partially update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Place"
+      responses:
+        "202":
+          description: Place partially updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Place"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Place not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete a place
+      operationId: deletePlace
+      tags:
+        - Places
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the place to delete
+      responses:
+        "202":
+          description: Place deleted successfully
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /conferences:
+    get:
+      summary: Get all conferences (optionally filter by minCapacity, maxCapacity or isOnline)
+      operationId: getAllConferences
+      tags:
+        - Conferences
+      parameters:
+        - name: minCapacity
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter conferences by minimum capacity
+        - name: maxCapacity
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter conferences by maximum capacity
+        - name: isOnline
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter conferences by online status
+      responses:
+        "200":
+          description: A list of conferences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conference"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      summary: Add a new conference
+      operationId: createConference
+      tags:
+        - Conferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Conference"
+      responses:
+        "201":
+          description: Conference added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Place or Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /conferences/{id}:
+    get:
+      summary: Get a conference by ID
+      operationId: getConferenceById
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to retrieve
+      responses:
+        "200":
+          description: Conference found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+        "404":
+          description: Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      summary: Update a conference
+      operationId: updateConference
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Conference"
+      responses:
+        "202":
+          description: Conference updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Conference not found or Place or Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      summary: Partially update a conference
+      operationId: partialUpdateConference
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to partially update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Conference"
+      responses:
+        "202":
+          description: Conference partially updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Conference not found or Place or Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete a conference
+      operationId: deleteConference
+      tags:
+        - Conferences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to delete
+      responses:
+        "202":
+          description: Conference deleted successfully
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /conferences/persons/{personId}:
+    get:
+      summary: Get all conferences a person is registered for
+      operationId: getConferencesByPersonId
+      tags:
+        - Conferences
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the person to filter conferences by
+      responses:
+        "200":
+          description: A list of conferences the person is registered for
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conference"
+        "404":
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /conferences/organizers/{organizerId}:
+    get:
+      summary: Get all conferences organized by a person
+      operationId: getConferencesByOrganizerId
+      tags:
+        - Conferences
+      parameters:
+        - name: organizerId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the organizer to filter conferences by
+      responses:
+        "200":
+          description: A list of conferences organized by the person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conference"
+        "404":
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /activities:
+    get:
+      summary: Get all activities (optionally filter by minDuration, maxDuration or isOpen)
+      operationId: getAllActivities
+      tags:
+        - Activities
+      parameters:
+        - name: minDuration
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter activities by minimum duration
+        - name: maxDuration
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter activities by maximum duration
+        - name: isOpen
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter activities by open status
+      responses:
+        "200":
+          description: A list of activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      summary: Add a new activity
+      operationId: createActivity
+      tags:
+        - Activities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+      responses:
+        "201":
+          description: Activity added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activity"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /activities/{id}:
+    get:
+      summary: Get an activity by ID
+      operationId: getActivityById
+      tags:
+        - Activities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the activity to retrieve
+      responses:
+        "200":
+          description: Activity found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activity"
+        "404":
+          description: Activity not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      summary: Update an activity
+      operationId: updateActivity
+      tags:
+        - Activities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the activity to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+      responses:
+        "202":
+          description: Activity updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activity"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Activity not found or Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      summary: Partially update an activity
+      operationId: partialUpdateActivity
+      tags:
+        - Activities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the activity to partially update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+      responses:
+        "202":
+          description: Activity partially updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Activity"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Activity not found or Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete an activity
+      operationId: deleteActivity
+      tags:
+        - Activities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the activity to delete
+      responses:
+        "202":
+          description: Activity deleted successfully
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /activities/conferences/{conferenceId}:
+    get:
+      summary: Get all activities for a conference
+      operationId: getActivitiesByConferenceId
+      tags:
+        - Activities
+      parameters:
+        - name: conferenceId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the conference to filter activities by
+      responses:
+        "200":
+          description: A list of activities for the conference
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+        "404":
+          description: Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /attendance:
+    get:
+      summary: Get all attendance records (optionally filter by minSeatNumber, maxSeatNumber or isCheckedIn)
+      operationId: getAllAttendances
+      tags:
+        - Attendances
+      parameters:
+        - name: minSeatNumber
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter attendance records by minimum seat number
+        - name: maxSeatNumber
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter attendance records by maximum seat number
+        - name: isCheckedIn
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter attendance records by check-in status
+      responses:
+        "200":
+          description: A list of attendance records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Attendance"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      summary: Add a new attendance record
+      operationId: createAttendance
+      tags:
+        - Attendances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Attendance"
+      responses:
+        "201":
+          description: Attendance record added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attendance"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Person or Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  
+  /attendance/{id}:
+    get:
+      summary: Get an attendance record by ID
+      operationId: getAttendanceById
+      tags:
+        - Attendances
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the attendance record to retrieve
+      responses:
+        "200":
+          description: Attendance record found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attendance"
+        "404":
+          description: Attendance record not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      summary: Update an attendance record
+      operationId: updateAttendance
+      tags:
+        - Attendances
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the attendance record to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Attendance"
+      responses:
+        "202":
+          description: Attendance record updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attendance"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Attendance record not found or Person or Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      summary: Partially update an attendance record
+      operationId: partialUpdateAttendance
+      tags:
+        - Attendances
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the attendance record to partially update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Attendance"
+      responses:
+        "202":
+          description: Attendance record partially updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attendance"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Attendance record not found or Person or Conference not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete an attendance record
+      operationId: deleteAttendance
+      tags:
+        - Attendances
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the attendance record to delete
+      responses:
+        "202":
+          description: Attendance record deleted successfully
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: "Javier"
+        lastName:
+          type: string
+          example: "Sanz"
+        email:
+          type: string
+          example: correofalso123@apieventos.com
+        pass:
+          type: string
+          example: "0f3fde0103dd44077c040215a2fabd09a097aecc"
+        age:
+          type: integer
+          example: 30
+        height:
+          type: number
+          format: float
+          example: 1.75
+        interests:
+          type: string
+          example: "Tech, 3D, videogames, etc"
+        birthDate:
+          type: string
+          format: date
+          example: "1996-05-29"
+        verified:
+          type: boolean
+          example: true
+
+    PersonWithoutPass:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: "Javier"
+        lastName:
+          type: string
+          example: "Sanz"
+        email:
+          type: string
+          example: correofalso123@apieventos.com
+        age:
+          type: integer
+          example: 30
+        height:
+          type: number
+          format: float
+          example: 1.75
+        interests:
+          type: string
+          example: "Tech, 3D, videogames, etc"
+        birthDate:
+          type: string
+          format: date
+          example: "1996-05-29"
+        verified:
+          type: boolean
+          example: true
+
+    Place:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Puerto Venecia"
+        address:
+          type: string
+          example: "Calle Teatro Malibrán, 1, 50001 Zaragoza"
+        capacity:
+          type: integer
+          example: 30
+        area:
+          type: number
+          format: float
+          example: 400.5
+        inaugurationDate:
+          type: string
+          format: date
+          example: "2015-02-01"
+        hasParking:
+          type: boolean
+          example: true
+        equipment:
+          type: string
+          example: "Altavoces, pantallas, proyector, etc"
+
+    Conference:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "3D Printing Day"
+        capacity:
+          type: integer
+          example: 40
+        budget:
+          type: number
+          format: float
+          example: 2000.5
+        online:
+          type: boolean
+          example: true
+        startDate:
+          type: string
+          format: date-time
+          example: "2025-07-11"
+        place:
+          $ref: "#/components/schemas/Place"
+        organizer:
+          $ref: "#/components/schemas/PersonWithoutPass"
+
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Limpieza y mantenimiento de impresoras 3D"
+        duration:
+          type: integer
+          example: 90
+        price:
+          type: number
+          format: float
+          example: 50.0
+        open:
+          type: boolean
+          example: true
+        schedule:
+          type: string
+          format: date-time
+          example: "2025-07-11T10:00:00Z"
+        conference:
+          $ref: "#/components/schemas/Conference"
+      
+    Attendance:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        ticketCode:
+          type: string
+          example: "decc4d45-ce13-4925-8675-b89382ed255b"
+        seatNumber:
+          type: integer
+          example: 5
+        ticketPrice:
+          type: number
+          format: float
+          example: 50.0
+        checkedIn:
+          type: boolean
+          example: false
+        registrationDate:
+          type: string
+          format: date-time
+          example: "2025-04-02T10:00:00Z"
+        person:
+          $ref: "#/components/schemas/PersonWithoutPass"
+        conference:
+          $ref: "#/components/schemas/Conference"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: "IllegalArgumentException"
+        message:
+          type: string
+          example: "Error found in the persons request"
