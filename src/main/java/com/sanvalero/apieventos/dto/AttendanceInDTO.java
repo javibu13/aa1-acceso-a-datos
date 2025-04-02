@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttendanceInDTO {
-    @NotNull(message = "Ticket code cannot be null")
-    @Min(value = 0, message = "Ticket code cannot be negative")
+    @NotNull(message = "Seat number cannot be null")
+    @Min(value = 0, message = "Seat number cannot be negative")
     private Integer seatNumber;
 
     @Min(value = 0, message = "Ticket price cannot be negative")
