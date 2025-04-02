@@ -1,6 +1,5 @@
 package com.sanvalero.apieventos.controller;
 
-import com.sanvalero.apieventos.domain.Attendance;
 import com.sanvalero.apieventos.dto.AttendanceInDTO;
 import com.sanvalero.apieventos.dto.AttendanceOutDTO;
 import com.sanvalero.apieventos.service.AttendanceService;
