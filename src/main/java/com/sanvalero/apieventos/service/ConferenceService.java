@@ -5,6 +5,8 @@ import com.sanvalero.apieventos.domain.Conference;
 import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.domain.Place;
 import com.sanvalero.apieventos.dto.ConferenceInDTO;
+import com.sanvalero.apieventos.dto.ConferenceOutDTO;
+import com.sanvalero.apieventos.dto.PersonOutDTO;
 import com.sanvalero.apieventos.repository.AttendanceRepository;
 import com.sanvalero.apieventos.repository.ConferenceRepository;
 import com.sanvalero.apieventos.repository.PersonRepository;
@@ -41,36 +43,63 @@ public class ConferenceService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Conference> getAllConferences() {
-        return conferenceRepository.findAll();
+    public List<ConferenceOutDTO> getAllConferences() {
+        // Get all conferences from the repository
+        List<Conference> conferences = conferenceRepository.findAll();
+        // Create a list to hold the ConferenceOutDTO objects
+        List<ConferenceOutDTO> conferenceOutDTOs = new ArrayList<>();
+        // Map each Conference object to a ConferenceOutDTO object and add it to the list
+        for (Conference conference : conferences) {
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(conference, ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(conference.getOrganizer(), PersonOutDTO.class));
+            conferenceOutDTOs.add(conferenceOutDTO);
+        }
+        return conferenceOutDTOs;
     }
 
-    public List<Conference> getConferencesByFilters(Integer minCapacity, Integer maxCapacity, Boolean isOnline) {
+    public List<ConferenceOutDTO> getConferencesByFilters(Integer minCapacity, Integer maxCapacity, Boolean isOnline) {
+        List<Conference> conferences;
         if (minCapacity != null && maxCapacity == null && isOnline == null) {
-            return conferenceRepository.findByCapacityGreaterThanEqual(minCapacity);
+            conferences = conferenceRepository.findByCapacityGreaterThanEqual(minCapacity);
         } else if (minCapacity == null && maxCapacity != null && isOnline == null) {
-            return conferenceRepository.findByCapacityLessThanEqual(maxCapacity);
+            conferences = conferenceRepository.findByCapacityLessThanEqual(maxCapacity);
         } else if (minCapacity == null && maxCapacity == null && isOnline != null) {
-            return conferenceRepository.findByOnline(isOnline);
+            conferences = conferenceRepository.findByOnline(isOnline);
         } else if (minCapacity != null && maxCapacity != null && isOnline == null) {
-            return conferenceRepository.findByCapacityBetween(minCapacity, maxCapacity);
+            conferences = conferenceRepository.findByCapacityBetween(minCapacity, maxCapacity);
         } else if (minCapacity != null && maxCapacity == null && isOnline != null) {
-            return conferenceRepository.findByCapacityGreaterThanEqualAndOnline(minCapacity, isOnline);
+            conferences = conferenceRepository.findByCapacityGreaterThanEqualAndOnline(minCapacity, isOnline);
         } else if (minCapacity == null && maxCapacity != null && isOnline != null) {
-            return conferenceRepository.findByCapacityLessThanEqualAndOnline(maxCapacity, isOnline);
+            conferences = conferenceRepository.findByCapacityLessThanEqualAndOnline(maxCapacity, isOnline);
         } else if (minCapacity != null && maxCapacity != null && isOnline != null) {
-            return conferenceRepository.findByCapacityBetweenAndOnline(minCapacity, maxCapacity, isOnline);
+            conferences = conferenceRepository.findByCapacityBetweenAndOnline(minCapacity, maxCapacity, isOnline);
         } else {
             // If no filters are applied, return all conferences
-            return conferenceRepository.findAll();
+            conferences = conferenceRepository.findAll();
+        }
+        // Create a list to hold the ConferenceOutDTO objects
+        List<ConferenceOutDTO> conferenceOutDTOs = new ArrayList<>();
+        // Map each Conference object to a ConferenceOutDTO object and add it to the list
+        for (Conference conference : conferences) {
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(conference, ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(conference.getOrganizer(), PersonOutDTO.class));
+            conferenceOutDTOs.add(conferenceOutDTO);
+        }
+        return conferenceOutDTOs;
+    }
+
+    public Optional<ConferenceOutDTO> getConferenceById(Long id) {
+        Optional<Conference> conference = conferenceRepository.findById(id);
+        if (conference.isPresent()) {
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(conference.get(), ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(conference.get().getOrganizer(), PersonOutDTO.class));
+            return Optional.of(conferenceOutDTO);
+        } else {
+            throw new EntityNotFoundException("Conference not found with id: " + id);
         }
     }
 
-    public Optional<Conference> getConferenceById(Long id) {
-        return conferenceRepository.findById(id);
-    }
-
-    public Conference createConference(ConferenceInDTO conferenceInDTO) throws EntityNotFoundException {
+    public ConferenceOutDTO createConference(ConferenceInDTO conferenceInDTO) throws EntityNotFoundException {
         // Check if the person and place exist before saving the conference
         Optional<Person> organizer = personRepository.findById(conferenceInDTO.getOrganizer());
         if (organizer.isEmpty()) {
@@ -85,10 +114,15 @@ public class ConferenceService {
         logger.info("Creating new conference..... {}", conference);
         conference.setOrganizer(organizer.get());
         conference.setPlace(place.get());
-        return conferenceRepository.save(conference);
+        Conference createdConference = conferenceRepository.save(conference);
+        // Map the created conference to ConferenceOutDTO and set the organizer
+        ConferenceOutDTO conferenceOutDTO = modelMapper.map(createdConference, ConferenceOutDTO.class);
+        conferenceOutDTO.setOrganizer(modelMapper.map(createdConference.getOrganizer(), PersonOutDTO.class));
+        // Return the created conference as ConferenceOutDTO
+        return conferenceOutDTO;
     }
 
-    public Conference updateConference(Long id, ConferenceInDTO conferenceInDTO) throws EntityNotFoundException {
+    public ConferenceOutDTO updateConference(Long id, ConferenceInDTO conferenceInDTO) throws EntityNotFoundException {
         if (conferenceRepository.existsById(id)) {
             // Check if the person and place exist before saving the conference
             Optional<Person> organizer = personRepository.findById(conferenceInDTO.getOrganizer());
@@ -105,13 +139,18 @@ public class ConferenceService {
             conference.setOrganizer(organizer.get());
             conference.setPlace(place.get());
             conference.setId(id); // Set the ID of the existing conference
-            return conferenceRepository.save(conference);
+            Conference updatedConference = conferenceRepository.save(conference);
+            // Map the updated conference to ConferenceOutDTO and set the organizer
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(updatedConference, ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(updatedConference.getOrganizer(), PersonOutDTO.class));
+            // Return the updated conference as ConferenceOutDTO
+            return conferenceOutDTO;
         } else {
             throw new EntityNotFoundException("Conference not found with id: " + id);
         }
     }
 
-    public Conference partialUpdateConference(Long id, ConferenceInDTO conferenceInDTO) throws EntityNotFoundException, IllegalArgumentException {
+    public ConferenceOutDTO partialUpdateConference(Long id, ConferenceInDTO conferenceInDTO) throws EntityNotFoundException, IllegalArgumentException {
         Optional<Conference> existingConference = conferenceRepository.findById(id);
         if (existingConference.isPresent()) {
             Conference conference = existingConference.get();
@@ -154,7 +193,12 @@ public class ConferenceService {
                 }
                 conference.setOrganizer(organizer.get());
             }
-            return conferenceRepository.save(conference);
+            Conference updatedConference = conferenceRepository.save(conference);
+            // Map the updated conference to ConferenceOutDTO and set the organizer
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(updatedConference, ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(updatedConference.getOrganizer(), PersonOutDTO.class));
+            // Return the updated conference as ConferenceOutDTO
+            return conferenceOutDTO;
         } else {
             throw new EntityNotFoundException("Conference not found with id: " + id);
         }
@@ -164,7 +208,7 @@ public class ConferenceService {
         conferenceRepository.deleteById(id);
     }
 
-    public List<Conference> getConferencesByPersonId(Long personId) throws EntityNotFoundException, IllegalArgumentException {
+    public List<ConferenceOutDTO> getConferencesByPersonId(Long personId) throws EntityNotFoundException, IllegalArgumentException {
         // Check if the person ID is valid (not null and greater than 0) and exists in the database
         if (personId == null || personId <= 0) {
             throw new IllegalArgumentException("Invalid person ID: " + personId);
@@ -177,18 +221,23 @@ public class ConferenceService {
         // Create a list to hold the conference IDs from the attendances
         List<Long> conferencesIds = new ArrayList<>();
         List<Conference> conferences = new ArrayList<>();
+        List<ConferenceOutDTO> conferenceOutDTOs = new ArrayList<>();
         for (Attendance attendance : attendances) {
             // Get the person ID from each attendance and find the corresponding person
             Long conferenceId = attendance.getConference().getId();
             if (!conferencesIds.contains(conferenceId)) {
                 conferencesIds.add(conferenceId);
                 conferences.add(attendance.getConference());
+                // Map each Conference object to a ConferenceOutDTO object and add it to the list
+                ConferenceOutDTO conferenceOutDTO = modelMapper.map(attendance.getConference(), ConferenceOutDTO.class);
+                conferenceOutDTO.setOrganizer(modelMapper.map(attendance.getConference().getOrganizer(), PersonOutDTO.class));
+                conferenceOutDTOs.add(conferenceOutDTO);
             }
         }
-        return conferences;
+        return conferenceOutDTOs;
     }
 
-    public List<Conference> getConferencesByOrganizerId(Long organizerId) throws EntityNotFoundException, IllegalArgumentException {
+    public List<ConferenceOutDTO> getConferencesByOrganizerId(Long organizerId) throws EntityNotFoundException, IllegalArgumentException {
         // Check if the organizer ID is valid (not null and greater than 0) and exists in the database
         if (organizerId == null || organizerId <= 0) {
             throw new IllegalArgumentException("Invalid organizer ID: " + organizerId);
@@ -198,6 +247,14 @@ public class ConferenceService {
         }
         // Get all conferences for the organizerId
         List<Conference> conferences = conferenceRepository.findByOrganizerId(organizerId);
-        return conferences;
+        // Create a list to hold the ConferenceOutDTO objects
+        List<ConferenceOutDTO> conferenceOutDTOs = new ArrayList<>();
+        // Map each Conference object to a ConferenceOutDTO object and add it to the list
+        for (Conference conference : conferences) {
+            ConferenceOutDTO conferenceOutDTO = modelMapper.map(conference, ConferenceOutDTO.class);
+            conferenceOutDTO.setOrganizer(modelMapper.map(conference.getOrganizer(), PersonOutDTO.class));
+            conferenceOutDTOs.add(conferenceOutDTO);
+        }
+        return conferenceOutDTOs;
     }
 }

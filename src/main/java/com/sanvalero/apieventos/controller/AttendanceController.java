@@ -45,16 +45,16 @@ public class AttendanceController {
     private AttendanceService attendanceService;
 
     @GetMapping
-    public ResponseEntity<List<Attendance>> getAllAttendances(@RequestParam(required = false) Integer minSeatNumber,
+    public ResponseEntity<List<AttendanceOutDTO>> getAllAttendances(@RequestParam(required = false) Integer minSeatNumber,
                                                     @RequestParam(required = false) Integer maxSeatNumber,
                                                     @RequestParam(required = false) Boolean isCheckedIn) {
         if (minSeatNumber != null || maxSeatNumber != null || isCheckedIn != null) {
             logger.info("Filtering attendances by minSeatNumber: {}, maxSeatNumber: {}, isCheckedIn: {}", minSeatNumber, maxSeatNumber, isCheckedIn);
-            List<Attendance> attendances = attendanceService.getAttendancesByFilters(minSeatNumber, maxSeatNumber, isCheckedIn);
+            List<AttendanceOutDTO> attendances = attendanceService.getAttendancesByFilters(minSeatNumber, maxSeatNumber, isCheckedIn);
             return new ResponseEntity<>(attendances, HttpStatus.OK);
         } else {
             logger.info("Retrieving all attendances without filters");
-            List<Attendance> attendances = attendanceService.getAllAttendances();
+            List<AttendanceOutDTO> attendances = attendanceService.getAllAttendances();
             return new ResponseEntity<>(attendances, HttpStatus.OK);
         }
     }

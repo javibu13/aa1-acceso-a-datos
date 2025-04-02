@@ -1,7 +1,7 @@
 package com.sanvalero.apieventos.controller;
 
-import com.sanvalero.apieventos.domain.Conference;
 import com.sanvalero.apieventos.dto.ConferenceInDTO;
+import com.sanvalero.apieventos.dto.ConferenceOutDTO;
 import com.sanvalero.apieventos.service.ConferenceService;
 import com.sanvalero.apieventos.exception.ErrorResponse;
 
@@ -44,22 +44,22 @@ public class ConferenceController {
     private ConferenceService conferenceService;
 
     @GetMapping
-    public ResponseEntity<List<Conference>> getAllConferences(@RequestParam(required = false) Integer minCapacity,
+    public ResponseEntity<List<ConferenceOutDTO>> getAllConferences(@RequestParam(required = false) Integer minCapacity,
                                                     @RequestParam(required = false) Integer maxCapacity,
                                                     @RequestParam(required = false) Boolean isOnline) {
         if (minCapacity != null || maxCapacity != null || isOnline != null) {
             logger.info("Filtering conferences by minCapacity: {}, maxCapacity: {}, isOnline: {}", minCapacity, maxCapacity, isOnline);
-            List<Conference> conferences = conferenceService.getConferencesByFilters(minCapacity, maxCapacity, isOnline);
+            List<ConferenceOutDTO> conferences = conferenceService.getConferencesByFilters(minCapacity, maxCapacity, isOnline);
             return new ResponseEntity<>(conferences, HttpStatus.OK);
         } else {
             logger.info("Retrieving all conferences without filters");
-            List<Conference> conferences = conferenceService.getAllConferences();
+            List<ConferenceOutDTO> conferences = conferenceService.getAllConferences();
             return new ResponseEntity<>(conferences, HttpStatus.OK);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Conference> getConferenceById(@PathVariable Long id) {
+    public ResponseEntity<ConferenceOutDTO> getConferenceById(@PathVariable Long id) {
         logger.info("Retrieving conference with id: {}", id);
         return conferenceService.getConferenceById(id)
                 .map(conference -> new ResponseEntity<>(conference, HttpStatus.OK))
@@ -67,16 +67,16 @@ public class ConferenceController {
     }
 
     @PostMapping
-    public ResponseEntity<Conference> createConference(@Valid @RequestBody ConferenceInDTO conferenceInDTO) {
+    public ResponseEntity<ConferenceOutDTO> createConference(@Valid @RequestBody ConferenceInDTO conferenceInDTO) {
         logger.info("Creating new conference: {}", conferenceInDTO);
-        Conference createdConference = conferenceService.createConference(conferenceInDTO);
+        ConferenceOutDTO createdConference = conferenceService.createConference(conferenceInDTO);
         return new ResponseEntity<>(createdConference, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Conference> updateConference(@PathVariable Long id, @Valid @RequestBody ConferenceInDTO conferenceInDTO) {
+    public ResponseEntity<ConferenceOutDTO> updateConference(@PathVariable Long id, @Valid @RequestBody ConferenceInDTO conferenceInDTO) {
         logger.info("Updating conference with id: {} to {}", id, conferenceInDTO);
-        Conference updatedConference = conferenceService.updateConference(id, conferenceInDTO);
+        ConferenceOutDTO updatedConference = conferenceService.updateConference(id, conferenceInDTO);
         if (updatedConference != null) {
             return new ResponseEntity<>(updatedConference, HttpStatus.ACCEPTED);
         } else {
@@ -85,9 +85,9 @@ public class ConferenceController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Conference> partialUpdateConference(@PathVariable Long id, @RequestBody ConferenceInDTO conferenceInDTO) {
+    public ResponseEntity<ConferenceOutDTO> partialUpdateConference(@PathVariable Long id, @RequestBody ConferenceInDTO conferenceInDTO) {
         logger.info("Partially updating conference with id: {} to {}", id, conferenceInDTO);
-        Conference updatedConference = conferenceService.partialUpdateConference(id, conferenceInDTO);
+        ConferenceOutDTO updatedConference = conferenceService.partialUpdateConference(id, conferenceInDTO);
         if (updatedConference != null) {
             return new ResponseEntity<>(updatedConference, HttpStatus.ACCEPTED);
         } else {
@@ -103,16 +103,16 @@ public class ConferenceController {
     }
 
     @GetMapping("/persons/{id}")
-    public ResponseEntity<List<Conference>> getConferencesByPersonId(@PathVariable Long id) {
+    public ResponseEntity<List<ConferenceOutDTO>> getConferencesByPersonId(@PathVariable Long id) {
         logger.info("Retrieving conferences for person with id: {}", id);
-        List<Conference> conferences = conferenceService.getConferencesByPersonId(id);
+        List<ConferenceOutDTO> conferences = conferenceService.getConferencesByPersonId(id);
         return new ResponseEntity<>(conferences, HttpStatus.OK);
     }
 
     @GetMapping("/organizers/{id}")
-    public ResponseEntity<List<Conference>> getConferencesByOrganizerId(@PathVariable Long id) {
+    public ResponseEntity<List<ConferenceOutDTO>> getConferencesByOrganizerId(@PathVariable Long id) {
         logger.info("Retrieving conferences for organizer with id: {}", id);
-        List<Conference> conferences = conferenceService.getConferencesByOrganizerId(id);
+        List<ConferenceOutDTO> conferences = conferenceService.getConferencesByOrganizerId(id);
         return new ResponseEntity<>(conferences, HttpStatus.OK);
     }
 

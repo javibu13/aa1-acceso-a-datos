@@ -35,29 +35,48 @@ public class AttendanceService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Attendance> getAllAttendances() {
-        return attendanceRepository.findAll();
+    public List<AttendanceOutDTO> getAllAttendances() {
+        // Retrieve all attendances from the repository and map them to DTOs
+        List<Attendance> attendances = attendanceRepository.findAll();
+        List<AttendanceOutDTO> attendanceOutDTOs = attendances.stream()
+                .map(attendance -> {
+                    AttendanceOutDTO attendanceOutDTO = modelMapper.map(attendance, AttendanceOutDTO.class);
+                    PersonOutDTO personOutDTO = modelMapper.map(attendance.getPerson(), PersonOutDTO.class);
+                    attendanceOutDTO.setPerson(personOutDTO);
+                    return attendanceOutDTO;
+                })
+                .toList();
+        return attendanceOutDTOs;
     }
 
-    public List<Attendance> getAttendancesByFilters(Integer minSeatNumber, Integer maxSeatNumber, Boolean isCheckedIn) {
+    public List<AttendanceOutDTO> getAttendancesByFilters(Integer minSeatNumber, Integer maxSeatNumber, Boolean isCheckedIn) {
+        List<Attendance> attendances;
         if (minSeatNumber != null && maxSeatNumber == null && isCheckedIn == null) {
-            return attendanceRepository.findBySeatNumberGreaterThanEqual(minSeatNumber);
+            attendances = attendanceRepository.findBySeatNumberGreaterThanEqual(minSeatNumber);
         } else if (minSeatNumber == null && maxSeatNumber != null && isCheckedIn == null) {
-            return attendanceRepository.findBySeatNumberLessThanEqual(maxSeatNumber);
+            attendances = attendanceRepository.findBySeatNumberLessThanEqual(maxSeatNumber);
         } else if (minSeatNumber == null && maxSeatNumber == null && isCheckedIn != null) {
-            return attendanceRepository.findByCheckedIn(isCheckedIn);
+            attendances = attendanceRepository.findByCheckedIn(isCheckedIn);
         } else if (minSeatNumber != null && maxSeatNumber != null && isCheckedIn == null) {
-            return attendanceRepository.findBySeatNumberBetween(minSeatNumber, maxSeatNumber);
+            attendances = attendanceRepository.findBySeatNumberBetween(minSeatNumber, maxSeatNumber);
         } else if (minSeatNumber != null && maxSeatNumber == null && isCheckedIn != null) {
-            return attendanceRepository.findBySeatNumberGreaterThanEqualAndCheckedIn(minSeatNumber, isCheckedIn);
+            attendances = attendanceRepository.findBySeatNumberGreaterThanEqualAndCheckedIn(minSeatNumber, isCheckedIn);
         } else if (minSeatNumber == null && maxSeatNumber != null && isCheckedIn != null) {
-            return attendanceRepository.findBySeatNumberLessThanEqualAndCheckedIn(maxSeatNumber, isCheckedIn);
+            attendances = attendanceRepository.findBySeatNumberLessThanEqualAndCheckedIn(maxSeatNumber, isCheckedIn);
         } else if (minSeatNumber != null && maxSeatNumber != null && isCheckedIn != null) {
-            return attendanceRepository.findBySeatNumberBetweenAndCheckedIn(minSeatNumber, maxSeatNumber, isCheckedIn);
+            attendances = attendanceRepository.findBySeatNumberBetweenAndCheckedIn(minSeatNumber, maxSeatNumber, isCheckedIn);
         } else {
             // If no filters are applied, return all attendances
-            return attendanceRepository.findAll();
+            attendances = attendanceRepository.findAll();
         }
+        return attendances.stream()
+                .map(attendance -> {
+                    AttendanceOutDTO attendanceOutDTO = modelMapper.map(attendance, AttendanceOutDTO.class);
+                    PersonOutDTO personOutDTO = modelMapper.map(attendance.getPerson(), PersonOutDTO.class);
+                    attendanceOutDTO.setPerson(personOutDTO);
+                    return attendanceOutDTO;
+                })
+                .toList();
     }
 
     public Optional<AttendanceOutDTO> getAttendanceById(Long id) {
