@@ -21,4 +21,6 @@ public interface ConferenceRepository extends CrudRepository<Conference, Long> {
     List<Conference> findByCapacityBetweenAndOnline(Integer minCapacity, Integer maxCapacity, Boolean isOnline);
     // Method to find a conference by ID
     Optional<Conference> findById(Long id);
+    // Method to find all conferences by organizer ID
+    List<Conference> findByOrganizerId(Long organizerId);
 }

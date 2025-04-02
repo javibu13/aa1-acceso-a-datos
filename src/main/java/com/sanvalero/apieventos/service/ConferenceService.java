@@ -166,7 +166,7 @@ public class ConferenceService {
     }
 
     public List<Conference> getConferencesByPersonId(Long personId) throws EntityNotFoundException, IllegalArgumentException {
-        // Check if the conference ID is valid (not null and greater than 0) and exists in the database
+        // Check if the person ID is valid (not null and greater than 0) and exists in the database
         if (personId == null || personId <= 0) {
             throw new IllegalArgumentException("Invalid person ID: " + personId);
         }
@@ -186,6 +186,19 @@ public class ConferenceService {
                 conferences.add(attendance.getConference());
             }
         }
+        return conferences;
+    }
+
+    public List<Conference> getConferencesByOrganizerId(Long organizerId) throws EntityNotFoundException, IllegalArgumentException {
+        // Check if the organizer ID is valid (not null and greater than 0) and exists in the database
+        if (organizerId == null || organizerId <= 0) {
+            throw new IllegalArgumentException("Invalid organizer ID: " + organizerId);
+        }
+        if (!personRepository.existsById(organizerId)) {
+            throw new EntityNotFoundException("Organizer not found with id: " + organizerId);
+        }
+        // Get all conferences for the organizerId
+        List<Conference> conferences = conferenceRepository.findByOrganizerId(organizerId);
         return conferences;
     }
 }
