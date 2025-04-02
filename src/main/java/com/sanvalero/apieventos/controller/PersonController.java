@@ -78,7 +78,7 @@ public class PersonController {
         logger.info("Updating person with id: {} to {}", id, person);
         PersonOutDTO updatedPerson = personService.updatePerson(id, person);
         if (updatedPerson != null) {
-            return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+            return new ResponseEntity<>(updatedPerson, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -89,7 +89,7 @@ public class PersonController {
         logger.info("Partially updating person with id: {} to {}", id, person);
         PersonOutDTO updatedPerson = personService.partialUpdatePerson(id, person);
         if (updatedPerson != null) {
-            return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+            return new ResponseEntity<>(updatedPerson, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -79,7 +79,7 @@ public class AttendanceController {
         logger.info("Updating attendance with id: {} to {}", id, attendanceInDTO);
         AttendanceOutDTO updatedAttendance = attendanceService.updateAttendance(id, attendanceInDTO);
         if (updatedAttendance != null) {
-            return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+            return new ResponseEntity<>(updatedAttendance, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -90,7 +90,7 @@ public class AttendanceController {
         logger.info("Partially updating attendance with id: {} to {}", id, attendanceInDTO);
         AttendanceOutDTO updatedAttendance = attendanceService.partialUpdateAttendance(id, attendanceInDTO);
         if (updatedAttendance != null) {
-            return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+            return new ResponseEntity<>(updatedAttendance, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

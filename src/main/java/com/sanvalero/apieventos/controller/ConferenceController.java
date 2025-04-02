@@ -78,7 +78,7 @@ public class ConferenceController {
         logger.info("Updating conference with id: {} to {}", id, conferenceInDTO);
         Conference updatedConference = conferenceService.updateConference(id, conferenceInDTO);
         if (updatedConference != null) {
-            return new ResponseEntity<>(updatedConference, HttpStatus.OK);
+            return new ResponseEntity<>(updatedConference, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -89,7 +89,7 @@ public class ConferenceController {
         logger.info("Partially updating conference with id: {} to {}", id, conferenceInDTO);
         Conference updatedConference = conferenceService.partialUpdateConference(id, conferenceInDTO);
         if (updatedConference != null) {
-            return new ResponseEntity<>(updatedConference, HttpStatus.OK);
+            return new ResponseEntity<>(updatedConference, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

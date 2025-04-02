@@ -77,7 +77,7 @@ public class PlaceController {
         logger.info("Updating place with id: {} to {}", id, place);
         Place updatedPlace = placeService.updatePlace(id, place);
         if (updatedPlace != null) {
-            return new ResponseEntity<>(updatedPlace, HttpStatus.OK);
+            return new ResponseEntity<>(updatedPlace, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -88,7 +88,7 @@ public class PlaceController {
         logger.info("Partially updating place with id: {} to {}", id, place);
         Place updatedPlace = placeService.partialUpdatePlace(id, place);
         if (updatedPlace != null) {
-            return new ResponseEntity<>(updatedPlace, HttpStatus.OK);
+            return new ResponseEntity<>(updatedPlace, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

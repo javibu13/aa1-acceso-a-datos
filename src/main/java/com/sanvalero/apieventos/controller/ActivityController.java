@@ -78,7 +78,7 @@ public class ActivityController {
         logger.info("Updating activity with id: {} to {}", id, activityInDTO);
         Activity updatedActivity = activityService.updateActivity(id, activityInDTO);
         if (updatedActivity != null) {
-            return new ResponseEntity<>(updatedActivity, HttpStatus.OK);
+            return new ResponseEntity<>(updatedActivity, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -89,7 +89,7 @@ public class ActivityController {
         logger.info("Partially updating activity with id: {} to {}", id, activityInDTO);
         Activity updatedActivity = activityService.partialUpdateActivity(id, activityInDTO);
         if (updatedActivity != null) {
-            return new ResponseEntity<>(updatedActivity, HttpStatus.OK);
+            return new ResponseEntity<>(updatedActivity, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
