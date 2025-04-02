@@ -1,9 +1,12 @@
 package com.sanvalero.apieventos.service;
 
+import com.sanvalero.apieventos.domain.Attendance;
 import com.sanvalero.apieventos.domain.Conference;
 import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.domain.Place;
 import com.sanvalero.apieventos.dto.ConferenceInDTO;
+import com.sanvalero.apieventos.dto.PersonOutDTO;
+import com.sanvalero.apieventos.repository.AttendanceRepository;
 import com.sanvalero.apieventos.repository.ConferenceRepository;
 import com.sanvalero.apieventos.repository.PersonRepository;
 import com.sanvalero.apieventos.repository.PlaceRepository;
@@ -16,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +29,9 @@ public class ConferenceService {
 
     @Autowired
     private ConferenceRepository conferenceRepository;
+
+    @Autowired
+    private AttendanceRepository attendanceRepository;
 
     @Autowired
     private PersonRepository personRepository;
@@ -156,5 +163,29 @@ public class ConferenceService {
 
     public void deleteConference(Long id) {
         conferenceRepository.deleteById(id);
+    }
+
+    public List<Conference> getConferencesByPersonId(Long personId) throws EntityNotFoundException, IllegalArgumentException {
+        // Check if the conference ID is valid (not null and greater than 0) and exists in the database
+        if (personId == null || personId <= 0) {
+            throw new IllegalArgumentException("Invalid person ID: " + personId);
+        }
+        if (!personRepository.existsById(personId)) {
+            throw new EntityNotFoundException("Person not found with id: " + personId);
+        }
+        // Get all attendances for the personId
+        List<Attendance> attendances = attendanceRepository.findByPersonId(personId);
+        // Create a list to hold the conference IDs from the attendances
+        List<Long> conferencesIds = new ArrayList<>();
+        List<Conference> conferences = new ArrayList<>();
+        for (Attendance attendance : attendances) {
+            // Get the person ID from each attendance and find the corresponding person
+            Long conferenceId = attendance.getConference().getId();
+            if (!conferencesIds.contains(conferenceId)) {
+                conferencesIds.add(conferenceId);
+                conferences.add(attendance.getConference());
+            }
+        }
+        return conferences;
     }
 }

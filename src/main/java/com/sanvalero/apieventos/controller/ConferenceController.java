@@ -102,6 +102,13 @@ public class ConferenceController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/persons/{id}")
+    public ResponseEntity<List<Conference>> getConferencesByPersonId(@PathVariable Long id) {
+        logger.info("Retrieving conferences for person with id: {}", id);
+        List<Conference> conferences = conferenceService.getConferencesByPersonId(id);
+        return new ResponseEntity<>(conferences, HttpStatus.OK);
+    }
+
     // Error handling methods
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseBody

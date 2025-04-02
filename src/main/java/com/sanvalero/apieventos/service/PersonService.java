@@ -1,9 +1,11 @@
 package com.sanvalero.apieventos.service;
 
+import com.sanvalero.apieventos.domain.Attendance;
 import com.sanvalero.apieventos.domain.Person;
 import com.sanvalero.apieventos.dto.PersonOutDTO;
+import com.sanvalero.apieventos.repository.AttendanceRepository;
+import com.sanvalero.apieventos.repository.ConferenceRepository;
 import com.sanvalero.apieventos.repository.PersonRepository;
-
 
 import org.modelmapper.ModelMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +20,12 @@ import java.util.Optional;
 public class PersonService {
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private ConferenceRepository conferenceRepository;
+
+    @Autowired
+    private AttendanceRepository attendanceRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -145,6 +153,30 @@ public class PersonService {
 
     public void deletePerson(Long id) {
         personRepository.deleteById(id);
+    }
+
+    public List<PersonOutDTO> getPersonsByConferenceId(Long conferenceId) {
+        // Check if the conference ID is valid (not null and greater than 0) and exists in the database
+        if (conferenceId == null || conferenceId <= 0) {
+            throw new IllegalArgumentException("Invalid conference ID: " + conferenceId);
+        }
+        if (!conferenceRepository.existsById(conferenceId)) {
+            throw new EntityNotFoundException("Conference not found with id: " + conferenceId);
+        }
+        // Get all attendances for the conference
+        List<Attendance> attendances = attendanceRepository.findByConferenceId(conferenceId);
+        // Create a list to hold the person IDs from the attendances
+        List<Long> personsIds = new ArrayList<>();
+        List<PersonOutDTO> personOutDTOs = new ArrayList<>();
+        for (Attendance attendance : attendances) {
+            // Get the person ID from each attendance and find the corresponding person
+            Long personId = attendance.getPerson().getId();
+            if (!personsIds.contains(personId)) {
+                personsIds.add(personId);
+                personOutDTOs.add(modelMapper.map(attendance.getPerson(), PersonOutDTO.class));
+            }
+        }
+        return personOutDTOs;
     }
 
 }

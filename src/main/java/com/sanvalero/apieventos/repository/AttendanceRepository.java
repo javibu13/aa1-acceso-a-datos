@@ -30,4 +30,8 @@ public interface AttendanceRepository extends CrudRepository<Attendance, Long> {
     List<Attendance> findBySeatNumberBetweenAndCheckedIn(@Param("minSeatNumber") Integer minSeatNumber, @Param("maxSeatNumber") Integer maxSeatNumber, @Param("isCheckedIn") Boolean isCheckedIn);
     // Method to find an attendance by ID
     Optional<Attendance> findById(Long id);
+    // Method to find all attendances by conference ID
+    List<Attendance> findByConferenceId(Long conferenceId);
+    // Method to find all attendances by person ID
+    List<Attendance> findByPersonId(Long personId);
 }
