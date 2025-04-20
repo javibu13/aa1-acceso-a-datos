@@ -16,23 +16,19 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 ⬜ Publica la API de la 1ª Evaluación en APIMan (Gateway + Developer Portal) y configúralas para que sea necesario un API token para usarlas. Añade también al menos 2 políticas que afecten a su funcionamiento (limitación de uso, por ejemplo)
 
 ## Requisitos opcionales
-✅ Añade una operación PATCH para cada una de las clases del modelo.
+⬜ Utiliza las herramientas Git y GitHub durante todo el desarrollo de la aplicación. Utiliza Git Flow.
 
-✅ Utiliza la herramienta Git (y GitHub) durante todo el desarrollo de la API. Escribe 
-el fichero README.md para explicar cómo poner en marcha el proyecto. Utiliza el 
-gestor de Issues para los problemas/fallos que vayan surgiendo.
+⬜ Parametriza ambas colecciones Postman de forma que sea fácil cambiar el host, puerto o basePath de la API
 
-⬜ Securiza algunas de tus operaciones de la API con un token JWT.
+⬜ Despliega en la nube alguna de tus APIs y publícala asi en APIMan
 
-✅ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos.
+⬜ Instala Newman para lanzar las colecciones de tus APIs y sus tests desde la consola. Genera un informe con el resultado
 
-✅ Añade 3 operaciones que utilicen consultas JPQL para extraer la información de la base de datos
+⬜ Utilizando docker compose, preparar un proyecto que permita lanzar tanto el servicio como la base de datos
 
-✅ Añade al fichero de especificación de la API (OpenAPI 3.0) un par de ejemplos 
-para cada operación.
+⬜ Utilizando docker compose, prepara un entorno de pruebas con base de datos para utilizar localmente mientras desarrollas
 
-✅ Añade un log a la API que registre las trazas de todas las operaciones y errores que 
-se produzcan.
+⬜ Securiza tu API con JWT
 
 
 # Descripción
