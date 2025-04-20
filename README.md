@@ -1,30 +1,19 @@
-# Acceso a Datos - Actividad de Aprendizaje 1 (AA1)
-API desarrollada con SpringBoot en Java para la asignatura de Acceso a Datos del 2º curso de DAM
-
+# Acceso a Datos - Actividad de Aprendizaje 2 (AA2)
+Proyecto sobre tests y despliegue de la API desarrollada con SpringBoot en Java para la asignatura de Acceso a Datos del 2º curso de DAM
 
 # Requisitos para la realización de la actividad
-Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
+En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada como Actividad de Aprendizaje 1 de la asignatura de Acceso a Datos. Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
 
 ## Requisitos obligatorios
-✅ Crear una API REST con SpringBoot en Java.
+⬜ Pepara tests unitarios y de integración para todas las clases obligatorias de tu API (eran 5 clases). En el caso de los tests de integración, preparar al menos para los casos 20X, 400 y 404 para cada operación.
 
-✅ Diseña la API y escribe el fichero OpenAPI 3.0 de la API. Incluye, al menos, 
-los casos de éxito (20X), 400, 404 y los 500.
+⬜ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
 
-✅ El modelo de datos estará compuesto de, al menos, 5 clases y tendrán que existir 
-relaciones entre ellas. Cada clase tendrá, al menos, 6 atributos (String, int, float, 
-boolean y algún tipo para almacenar fechas). Cada clase tendrá, al menos, 2 
-atributos obligatorios y algún otro con algún tipo de restricción de 
-formato/validación. 
+⬜ Prepara 3 tests en cada uno de los casos de prueba en una colección de Postman (la de la API que has implementado o la de la API Virtual)  forma que ésta se pueda lanzar utilizando el Collection Runner de Postman
 
-✅ Se tendrá que poder realizar, al menos, las operaciones CRUD sobre cada una de 
-las clases. Se controlarán, al menos, los errores 400, 404 y 500 
+⬜ Instala y pon en marcha APIMan
 
-✅ Añade opciones de filtrado para al menos una operación en cada clase en donde se 
-puedan indicar hasta 3 campos diferentes (solo aplicable para operaciones GET).
-
-✅ Prepara una colección Postman que permita probar todas las operaciones 
-desarrolladas.
+⬜ Publica la API de la 1ª Evaluación en APIMan (Gateway + Developer Portal) y configúralas para que sea necesario un API token para usarlas. Añade también al menos 2 políticas que afecten a su funcionamiento (limitación de uso, por ejemplo)
 
 ## Requisitos opcionales
 ✅ Añade una operación PATCH para cada una de las clases del modelo.
