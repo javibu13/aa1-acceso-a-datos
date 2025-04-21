@@ -14,8 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.sanvalero.apieventos.domain.*;
 import com.sanvalero.apieventos.dto.*;
@@ -44,9 +42,6 @@ class ConferenceServiceTests {
 
     @Mock
     private ModelMapper modelMapper;
-
-    @Mock
-    private Logger logger;
 
     @Test
     void testGetAllConferences() {
