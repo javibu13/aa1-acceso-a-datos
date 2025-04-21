@@ -55,9 +55,9 @@ class PersonServiceTests {
 	public void testGetAllPersons() {
 		// Create a list of persons to be returned by the mock repository
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
-			new Person((long) 2, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true),
-			new Person((long) 3, "Luna", "Sanz", "luna@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 6, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
+			new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
+			new Person(2L, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true),
+			new Person(3L, "Luna", "Sanz", "luna@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 6, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
 		);
 		// Mock the repository to return the list of persons
 		when(personRepository.findAll()).thenReturn(mockPersons);
@@ -97,7 +97,7 @@ class PersonServiceTests {
 	public void testGetPersonsByFiltersFirstName() {
 		// Create a list of persons to be returned by the mock repository
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
+			new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
 		);
 		// Mock the repository to return the list of persons
 		when(personRepository.findByFirstName("Javier")).thenReturn(mockPersons);
@@ -140,8 +140,8 @@ class PersonServiceTests {
 	public void testGetPersonsByFiltersAge() {
 		// Create a list of persons to be returned by the mock repository
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
-			new Person((long) 2, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true)
+			new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
+			new Person(2L, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true)
 		);
 		// Mock the repository to return the list of persons
 		when(personRepository.findByAge(28)).thenReturn(mockPersons);
@@ -190,9 +190,9 @@ class PersonServiceTests {
 	public void testGetPersonsByFiltersVerified() {
 		// Create a list of persons to be returned by the mock repository
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
-			new Person((long) 2, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true),
-			new Person((long) 3, "Luna", "Sanz", "luna@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 6, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
+			new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
+			new Person(2L, "Montse", "García", "montse@garcia.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true),
+			new Person(3L, "Luna", "Sanz", "luna@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 6, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
 		);
 		// Mock the repository to return the list of persons
 		when(personRepository.findByVerified(true)).thenReturn(mockPersons);
@@ -241,7 +241,7 @@ class PersonServiceTests {
 	public void testGetPersonsByFiltersFirstNameAgeVerified() {
 		// Create a list of persons to be returned by the mock repository
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
+			new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true)
 		);
 		// Mock the repository to return the list of persons
 		when(personRepository.findByFirstNameAndAgeAndVerified("Javier", 28, true)).thenReturn(mockPersons);
@@ -285,14 +285,14 @@ class PersonServiceTests {
 	@Test
 	public void testGetPersonById() {
 		// Create a Optional person to be returned by the mock repository
-		Optional<Person> mockPerson = Optional.of(new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
+		Optional<Person> mockPerson = Optional.of(new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
 		// Mock the repository to return the person
-		when(personRepository.findById((long) 1)).thenReturn(mockPerson);
+		when(personRepository.findById(1L)).thenReturn(mockPerson);
 		// Mock the modelMapper conversion
-		when(modelMapper.map(mockPerson.get(), PersonOutDTO.class)).thenReturn(new PersonOutDTO((long) 1, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
+		when(modelMapper.map(mockPerson.get(), PersonOutDTO.class)).thenReturn(new PersonOutDTO(1L, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
 
 		// Call the service method
-		Optional<PersonOutDTO> result = personService.getPersonById((long) 1);
+		Optional<PersonOutDTO> result = personService.getPersonById(1L);
 		// Check the result
 		assertEquals(true, result.isPresent());
 		assertEquals(1, result.get().getId());
@@ -305,11 +305,11 @@ class PersonServiceTests {
 	@Test
 	public void testCreatePerson() {
 		// Create a person to be saved
-		Person mockPerson = new Person((long) 1, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
+		Person mockPerson = new Person(1L, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
 		// Mock the repository to return the saved person
 		when(personRepository.save(mockPerson)).thenReturn(mockPerson);
 		// Mock the modelMapper conversion
-		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO((long) 1, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
+		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO(1L, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
 		// Call the service method
 		PersonOutDTO result = personService.createPerson(mockPerson);
 		// Check the result
@@ -323,7 +323,7 @@ class PersonServiceTests {
 	@Test
 	public void testUpdatePerson() throws Exception {
 		// Create the id of the person to be updated
-		Long id = (long) 1;
+		Long id = 1L;
 		// Create a person to be updated
 		Person mockPerson = new Person(id, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
 		// Mock the repository to return true for existsById
@@ -331,7 +331,7 @@ class PersonServiceTests {
 		// Mock the repository to return the saved person
 		when(personRepository.save(mockPerson)).thenReturn(mockPerson);
 		// Mock the modelMapper conversion
-		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO((long) 1, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
+		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO(1L, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
 		// Call the service method
 		PersonOutDTO result = personService.updatePerson(id, mockPerson);
 		// Check the result
@@ -347,7 +347,7 @@ class PersonServiceTests {
 	@Test
 	public void testPartialUpdatePerson() throws Exception {
 		// Create the id of the person to be partially updated
-		Long id = (long) 1;
+		Long id = 1L;
 		// Create a person to be partially updated
 		Person mockPerson = new Person(id, "Javier", "Sanz", "javier@sanz.com", "0f3fde0103dd44077c040215a2fabd09a097aecc", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
 		// Mock the repository to return true for existsById
@@ -355,7 +355,7 @@ class PersonServiceTests {
 		// Mock the repository to return the saved person
 		when(personRepository.save(mockPerson)).thenReturn(mockPerson);
 		// Mock the modelMapper conversion
-		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO((long) 1, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
+		when(modelMapper.map(mockPerson, PersonOutDTO.class)).thenReturn(new PersonOutDTO(1L, "Javier", "Sanz", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true));
 		// Call the service method
 		PersonOutDTO result = personService.partialUpdatePerson(id, mockPerson);
 		// Check the result
@@ -378,20 +378,20 @@ class PersonServiceTests {
 	@Test
 	public void testGetPersonsByConferenceId() {
 		// Create the organizer of the conference
-		Person organizer = new Person((long) 1, "Javier", "Sanz", "0f3fde0103dd44077c040215a2fabd09a097aecc", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
+		Person organizer = new Person(1L, "Javier", "Sanz", "0f3fde0103dd44077c040215a2fabd09a097aecc", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true);
 		// Create the place of the conference
-		Place place = new Place((long) 1, "Place 1", "Address 1", 1000, 2000.0, LocalDate.of(1996, 4, 29), true, "Equipment 1, Equipment 2, etc");
+		Place place = new Place(1L, "Place 1", "Address 1", 1000, 2000.0, LocalDate.of(1996, 4, 29), true, "Equipment 1, Equipment 2, etc");
 		// Create the mock conference
-		Conference conference = new Conference((long) 1, "Conference 1", 100, 2000.0, true, LocalDate.of(2025, 4, 29), place, organizer);
+		Conference conference = new Conference(1L, "Conference 1", 100, 2000.0, true, LocalDate.of(2025, 4, 29), place, organizer);
 		// Create a list of persons to be the attendees of the conference
 		List<Person> mockPersons = List.of(
-			new Person((long) 1, "Javier", "Sanz", "0f3fde0103dd44077c040215a2fabd09a097aecc", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
-			new Person((long) 2, "Montse", "García", "0f3fde0103dd44077c040215a2fabd09a097aecc", "montse@garcia.com", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true)
+			new Person(1L, "Javier", "Sanz", "0f3fde0103dd44077c040215a2fabd09a097aecc", "javier@sanz.com", 28, 1.75, "Technology", LocalDate.of(1996, 4, 29), true),
+			new Person(2L, "Montse", "García", "0f3fde0103dd44077c040215a2fabd09a097aecc", "montse@garcia.com", 28, 1.75, "Technology", LocalDate.of(1996, 6, 11), true)
 		);
 		// Create a list of attendances to be returned by the mock repository
 		List<Attendance> mockAttendances = List.of(
-			new Attendance((long) 1, "TEST-CODE-1", 1, 5.0, false, LocalDateTime.now(), mockPersons.getFirst(), conference),
-			new Attendance((long) 2, "TEST-CODE-2", 2, 5.0, false, LocalDateTime.now(), mockPersons.getLast(), conference)
+			new Attendance(1L, "TEST-CODE-1", 1, 5.0, false, LocalDateTime.now(), mockPersons.getFirst(), conference),
+			new Attendance(2L, "TEST-CODE-2", 2, 5.0, false, LocalDateTime.now(), mockPersons.getLast(), conference)
 		);
 		// Mock the repository to return the list of persons
 		when(conferenceRepository.existsById(conference.getId())).thenReturn(true);
