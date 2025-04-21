@@ -323,7 +323,7 @@ class ConferenceServiceTests {
             conferenceService.getConferenceById(1L);
         } catch (EntityNotFoundException e) {
             // Check the exception message
-            assertEquals("Conference not found", e.getMessage());
+            assertEquals("Conference not found with id: 1", e.getMessage());
             // Check the exception type
             assertEquals(EntityNotFoundException.class, e.getClass());
         }
@@ -394,7 +394,7 @@ class ConferenceServiceTests {
             conferenceService.createConference(inDTO);
         } catch (EntityNotFoundException e) {
             // Check the exception message
-            assertEquals("Organizer not found", e.getMessage());
+            assertEquals("Organizer not found with id: 1", e.getMessage());
             // Check the exception type
             assertEquals(EntityNotFoundException.class, e.getClass());
         }
