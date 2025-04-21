@@ -33,6 +33,8 @@ import com.sanvalero.apieventos.repository.ConferenceRepository;
 import com.sanvalero.apieventos.repository.PersonRepository;
 import com.sanvalero.apieventos.service.PersonService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTests {
 
@@ -344,6 +346,22 @@ class PersonServiceTests {
 		verify(modelMapper, times(1)).map(mockPerson, PersonOutDTO.class);
 	}
 
+	public void testUpdatePersonNotFound() {
+		// Create the id of the person to be updated
+		Long id = 9L;
+		// Mock the repository to return false for existsById
+		when(personRepository.existsById(id)).thenReturn(false);
+		// Call the service method and expect an exception
+		try {
+			personService.updatePerson(id, new Person());
+		} catch (Exception e) {
+			// Check the exception message
+			assertEquals("Person not found with id: " + id, e.getMessage());
+			// Check the exception type
+			assertEquals(EntityNotFoundException.class, e.getClass());
+		}
+	}
+
 	@Test
 	public void testPartialUpdatePerson() throws Exception {
 		// Create the id of the person to be partially updated
@@ -368,6 +386,23 @@ class PersonServiceTests {
 		verify(personRepository, times(1)).save(any(Person.class));
 		verify(modelMapper, times(1)).map(mockPerson, PersonOutDTO.class);
 		verify(modelMapper, times(1)).map(any(Person.class), eq(PersonOutDTO.class));
+	}
+
+	@Test
+	public void testPartialUpdatePersonNotFound() {
+		// Create the id of the person to be partially updated
+		Long id = 9L;
+		// Mock the repository to return false for existsById
+		when(personRepository.findById(id)).thenReturn(Optional.empty());
+		// Call the service method and expect an exception
+		try {
+			personService.partialUpdatePerson(id, new Person());
+		} catch (Exception e) {
+			// Check the exception message
+			assertEquals("Person not found with id: " + id, e.getMessage());
+			// Check the exception type
+			assertEquals(EntityNotFoundException.class, e.getClass());
+		}
 	}
 
 	@Test
