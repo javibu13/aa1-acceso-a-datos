@@ -43,7 +43,7 @@ class ActivityServiceTests {
     private ModelMapper modelMapper;
 
     @Test
-    void testGetAllActivities() {
+    public void testGetAllActivities() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -60,7 +60,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivitiesByFiltersMinDuration() {
+    public void testGetActivitiesByFiltersMinDuration() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -77,7 +77,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivitiesByFiltersMaxDuration() {
+    public void testGetActivitiesByFiltersMaxDuration() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -94,7 +94,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivitiesByFiltersIsOpen() {
+    public void testGetActivitiesByFiltersIsOpen() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -111,7 +111,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivitiesByFiltersMinDurationMaxDurationIsOpen() {
+    public void testGetActivitiesByFiltersMinDurationMaxDurationIsOpen() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -129,7 +129,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivityById() {
+    public void testGetActivityById() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -146,7 +146,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testCreateActivity() {
+    public void testCreateActivity() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO("New Activity", 60, 50.0, true, LocalDateTime.now(), 1L);
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
@@ -167,7 +167,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testCreateActivityConferenceNotFound() {
+    public void testCreateActivityConferenceNotFound() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO();
         inDTO.setConference(1L);
@@ -185,7 +185,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testUpdateActivity() {
+    public void testUpdateActivity() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO();
         inDTO.setTitle("Updated Activity");
@@ -213,7 +213,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testUpdateActivityNotFound() {
+    public void testUpdateActivityNotFound() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO();
         inDTO.setConference(1L);
@@ -233,7 +233,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testPartialUpdateActivity() {
+    public void testPartialUpdateActivity() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO();
         inDTO.setTitle("Partially Updated");
@@ -256,7 +256,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testPartialUpdateActivityInvalidData() {
+    public void testPartialUpdateActivityInvalidData() {
         // Create data for the test
         ActivityInDTO inDTO = new ActivityInDTO();
         inDTO.setDuration(-10); // Invalid negative duration
@@ -280,12 +280,12 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testDeleteActivity() {
+    public void testDeleteActivity() {
         // Not needed for this test case
     }
 
     @Test
-    void testGetActivitiesByConferenceId() {
+    public void testGetActivitiesByConferenceId() {
         // Create data for the test
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -303,7 +303,7 @@ class ActivityServiceTests {
     }
 
     @Test
-    void testGetActivitiesByConferenceIdNotFound() {
+    public void testGetActivitiesByConferenceIdNotFound() {
         // Mock the repository method to return false for conference existence check
         when(conferenceRepository.existsById(1L)).thenReturn(false);
         // Call the method to test and expect an exception

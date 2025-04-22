@@ -44,7 +44,7 @@ class ConferenceServiceTests {
     private ModelMapper modelMapper;
 
     @Test
-    void testGetAllConferences() {
+    public void testGetAllConferences() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -91,7 +91,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferencesByFiltersMinCapacity() {
+    public void testGetConferencesByFiltersMinCapacity() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -136,7 +136,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferencesByFiltersMaxCapacity() {
+    public void testGetConferencesByFiltersMaxCapacity() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -181,7 +181,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferencesByFiltersOnline() {
+    public void testGetConferencesByFiltersOnline() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -226,7 +226,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferencesByFiltersMinCapacityMaxCapacityOnline() {
+    public void testGetConferencesByFiltersMinCapacityMaxCapacityOnline() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -271,7 +271,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferenceById() {
+    public void testGetConferenceById() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
@@ -314,7 +314,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferenceByIdNotFound() {
+    public void testGetConferenceByIdNotFound() {
         // Mock the repository to return an empty Optional
         when(conferenceRepository.findById(1L)).thenReturn(Optional.empty());
 
@@ -332,7 +332,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testCreateConference() {
+    public void testCreateConference() {
         // Create test data
         ConferenceInDTO inDTO = new ConferenceInDTO("New Conf", 100, 1000.0, false, LocalDate.now().plusDays(1), 1L, 1L);
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
@@ -383,7 +383,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testCreateConferenceOrganizerNotFound() {
+    public void testCreateConferenceOrganizerNotFound() {
         // Create test data
         ConferenceInDTO inDTO = new ConferenceInDTO();
         inDTO.setOrganizer(1L);
@@ -403,7 +403,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testUpdateConference() {
+    public void testUpdateConference() {
         // Create test data
         ConferenceInDTO inDTO = new ConferenceInDTO("Updated Conf", 150, 1500.0, true, LocalDate.now().plusDays(2), 1L, 1L);
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
@@ -452,7 +452,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testPartialUpdateConference() {
+    public void testPartialUpdateConference() {
         // Create test data
         ConferenceInDTO inDTO = new ConferenceInDTO("Updated Conf", 150, 1500.0, true, LocalDate.now().plusDays(2), 1L, 1L);
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
@@ -499,12 +499,12 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testDeleteConference() {
+    public void testDeleteConference() {
         // Not needed for this test case
     }
 
     @Test
-    void testGetConferencesByPersonId() {
+    public void testGetConferencesByPersonId() {
         // Create test data
         Person person = new Person(1L, "Attendee", "Test", "att@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Person organizer = new Person(2L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
@@ -551,7 +551,7 @@ class ConferenceServiceTests {
     }
 
     @Test
-    void testGetConferencesByOrganizerId() {
+    public void testGetConferencesByOrganizerId() {
         // Create test data
         Person organizer = new Person(1L, "Organizer", "Test", "org@test.com", "pass", 30, 1.75, "Tech", LocalDate.now(), true);
         Place place = new Place(1L, "Place 1", "Address 1", 100, 200.0, LocalDate.now(), true, "Equipment");
