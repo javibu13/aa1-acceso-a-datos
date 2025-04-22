@@ -178,7 +178,7 @@ class AttendanceServiceTests {
             fail("Expected EntityNotFoundException to be thrown");
         } catch (EntityNotFoundException e) {
             // Check the exception message
-            assertEquals("Conference not found", e.getMessage());
+            assertEquals("Conference not found with ID: 1", e.getMessage());
             // Check the exception type
             assertEquals(EntityNotFoundException.class, e.getClass());
         }
@@ -259,7 +259,7 @@ class AttendanceServiceTests {
             fail("Expected IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             // Check the exception message
-            assertEquals("Invalid seat number", e.getMessage());
+            assertEquals("Seat number cannot be negative", e.getMessage());
             // Check the exception type
             assertEquals(IllegalArgumentException.class, e.getClass());
         }
