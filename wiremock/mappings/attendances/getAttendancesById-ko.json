@@ -1,0 +1,14 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPattern": "/attendances/[0-9]+"
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "attendances/errorResponse-404.json"
+    }
+}
