@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "firstName": "Javier",
+        "lastName": "Sanz",
+        "email": "javier@sanz.com",
+        "age": 28,
+        "height": 1.75,
+        "interests": "Tech, 3D, videogames, etc",
+        "birthDate": "1996-05-29",
+        "verified": false
+    }
+]
