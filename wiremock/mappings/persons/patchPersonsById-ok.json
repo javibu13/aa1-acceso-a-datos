@@ -1,0 +1,19 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "PATCH",
+        "urlPath": "/persons/1",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 202,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "persons/getPersonsById-ok-1.json"
+    }
+}
