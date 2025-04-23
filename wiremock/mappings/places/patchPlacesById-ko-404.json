@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "PATCH",
+        "urlPath": "/places/2",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "places/errorResponse-404.json"
+    }
+}
