@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Place 1",
+        "address": "Fake Street 123",
+        "capacity": 100,
+        "area": 200.0,
+        "inaugurationDate": "2025-01-01",
+        "hasParking": true,
+        "equipment": "Projector, Whiteboard"
+    }
+]
