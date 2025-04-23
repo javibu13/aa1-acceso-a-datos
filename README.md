@@ -1,49 +1,34 @@
-# Acceso a Datos - Actividad de Aprendizaje 1 (AA1)
-API desarrollada con SpringBoot en Java para la asignatura de Acceso a Datos del 2º curso de DAM
-
+# Acceso a Datos - Actividad de Aprendizaje 2 (AA2)
+Proyecto sobre tests y despliegue de la API desarrollada con SpringBoot en Java para la asignatura de Acceso a Datos del 2º curso de DAM
 
 # Requisitos para la realización de la actividad
-Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
+En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada como Actividad de Aprendizaje 1 de la asignatura de Acceso a Datos. Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
 
 ## Requisitos obligatorios
-✅ Crear una API REST con SpringBoot en Java.
+✅ Pepara tests unitarios y de integración para todas las clases obligatorias de tu API (eran 5 clases). En el caso de los tests de integración, preparar al menos para los casos 20X, 400 y 404 para cada operación.
 
-✅ Diseña la API y escribe el fichero OpenAPI 3.0 de la API. Incluye, al menos, 
-los casos de éxito (20X), 400, 404 y los 500.
+⬜ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
 
-✅ El modelo de datos estará compuesto de, al menos, 5 clases y tendrán que existir 
-relaciones entre ellas. Cada clase tendrá, al menos, 6 atributos (String, int, float, 
-boolean y algún tipo para almacenar fechas). Cada clase tendrá, al menos, 2 
-atributos obligatorios y algún otro con algún tipo de restricción de 
-formato/validación. 
+⬜ Prepara 3 tests en cada uno de los casos de prueba en una colección de Postman (la de la API que has implementado o la de la API Virtual)  forma que ésta se pueda lanzar utilizando el Collection Runner de Postman
 
-✅ Se tendrá que poder realizar, al menos, las operaciones CRUD sobre cada una de 
-las clases. Se controlarán, al menos, los errores 400, 404 y 500 
+⬜ Instala y pon en marcha APIMan
 
-✅ Añade opciones de filtrado para al menos una operación en cada clase en donde se 
-puedan indicar hasta 3 campos diferentes (solo aplicable para operaciones GET).
-
-✅ Prepara una colección Postman que permita probar todas las operaciones 
-desarrolladas.
+⬜ Publica la API de la 1ª Evaluación en APIMan (Gateway + Developer Portal) y configúralas para que sea necesario un API token para usarlas. Añade también al menos 2 políticas que afecten a su funcionamiento (limitación de uso, por ejemplo)
 
 ## Requisitos opcionales
-✅ Añade una operación PATCH para cada una de las clases del modelo.
+⬜ Utiliza las herramientas Git y GitHub durante todo el desarrollo de la aplicación. Utiliza Git Flow.
 
-✅ Utiliza la herramienta Git (y GitHub) durante todo el desarrollo de la API. Escribe 
-el fichero README.md para explicar cómo poner en marcha el proyecto. Utiliza el 
-gestor de Issues para los problemas/fallos que vayan surgiendo.
+⬜ Parametriza ambas colecciones Postman de forma que sea fácil cambiar el host, puerto o basePath de la API
 
-⬜ Securiza algunas de tus operaciones de la API con un token JWT.
+⬜ Despliega en la nube alguna de tus APIs y publícala asi en APIMan
 
-✅ Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos.
+⬜ Instala Newman para lanzar las colecciones de tus APIs y sus tests desde la consola. Genera un informe con el resultado
 
-✅ Añade 3 operaciones que utilicen consultas JPQL para extraer la información de la base de datos
+⬜ Utilizando docker compose, preparar un proyecto que permita lanzar tanto el servicio como la base de datos
 
-✅ Añade al fichero de especificación de la API (OpenAPI 3.0) un par de ejemplos 
-para cada operación.
+⬜ Utilizando docker compose, prepara un entorno de pruebas con base de datos para utilizar localmente mientras desarrollas
 
-✅ Añade un log a la API que registre las trazas de todas las operaciones y errores que 
-se produzcan.
+⬜ Securiza tu API con JWT
 
 
 # Descripción
