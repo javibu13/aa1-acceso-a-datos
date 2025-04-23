@@ -1,0 +1,14 @@
+{
+    "priority": 99,
+    "request": {
+        "method": "GET",
+        "urlPath": "/places"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "places/getPlaces-ok.json"
+    }
+}

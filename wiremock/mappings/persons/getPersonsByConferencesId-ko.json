@@ -1,0 +1,14 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPattern": "/persons/conferences/[0-9]+"
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "persons/errorResponse-404.json"
+    }
+}

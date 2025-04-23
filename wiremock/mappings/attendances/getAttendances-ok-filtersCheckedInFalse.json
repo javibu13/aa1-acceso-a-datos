@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPath": "/attendances",
+        "queryParameters": {
+            "isCheckedIn": {
+                "equalTo": "false"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "attendances/getAttendances-ok-filtersCheckedInFalse.json"
+    }
+}

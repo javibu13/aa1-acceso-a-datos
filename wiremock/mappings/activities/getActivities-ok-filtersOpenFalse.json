@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPath": "/activities",
+        "queryParameters": {
+            "isOpen": {
+                "equalTo": "false"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "activities/getActivities-ok-filtersOpenFalse.json"
+    }
+}

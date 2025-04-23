@@ -52,3 +52,10 @@ Las credenciales configuradas son de ejemplo y no son seguras. Se recomienda cam
 
 # Postman
 La colección de Postman se encuentra exportada en el fichero con nombre `API_Eventos.postman_collection.json`. Para importar la colección en Postman, se debe abrir Postman y hacer clic en el botón "Importar" en la parte superior izquierda. Luego, seleccionar el archivo `API_Eventos.postman_collection.json` y hacer clic en "Importar". Esto importará la colección de Postman con todas las peticiones necesarias para probar la API.
+
+# Mock API
+La API Mock se encuentra en el directorio `wiremock`. Para poder ejecutarla se debe añadir en la carpeta de `wiremock` el archivo `wiremock-standalone-4.0.0-beta.1.jar` (con el que ha sido desarrollada y probada) que se puede descargar desde la página oficial de WireMock. Una vez descargado el archivo, se debe ejecutar el siguiente comando desde la terminal en la carpeta `wiremock`:
+```
+java -jar wiremock-standalone-4.0.0-beta.1.jar
+```
+La API Mock estará disponible en el puerto 8080 y se puede acceder a ella desde Postman o desde cualquier navegador web. La API Mock tiene la misma estructura que la API real, pero no realiza ninguna operación sobre la base de datos. En su lugar, devuelve respuestas predefinidas para cada una de las peticiones realizadas.

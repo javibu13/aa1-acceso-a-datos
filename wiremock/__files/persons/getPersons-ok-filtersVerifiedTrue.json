@@ -1,0 +1,13 @@
+[
+    {
+        "id": 2,
+        "firstName": "Montse",
+        "lastName": "García",
+        "email": "montse@garcia.com",
+        "age": 28,
+        "height": 1.58,
+        "interests": "Pixar, Animation, videogames, etc",
+        "birthDate": "1996-07-11",
+        "verified": true
+    }
+]

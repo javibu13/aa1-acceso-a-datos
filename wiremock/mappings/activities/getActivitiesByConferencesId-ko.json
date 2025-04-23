@@ -1,0 +1,14 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPattern": "/activities/conferences/[0-9]+"
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "activities/errorResponse-404.json"
+    }
+}

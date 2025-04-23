@@ -1,0 +1,29 @@
+{
+    "id": 1,
+    "name": "3D Printing Day",
+    "capacity": 40,
+    "budget": 2800,
+    "online": true,
+    "startDate": "2025-07-11",
+    "place": {
+        "id": 1,
+        "name": "Place 1",
+        "address": "Fake Street 123",
+        "capacity": 100,
+        "area": 200.0,
+        "inaugurationDate": "2025-01-01",
+        "hasParking": true,
+        "equipment": "Projector, Whiteboard"
+    },
+    "organizer": {
+        "id": 1,
+        "firstName": "Javier",
+        "lastName": "Sanz",
+        "email": "javier@sanz.com",
+        "age": 28,
+        "height": 1.75,
+        "interests": "Tech, 3D, videogames, etc",
+        "birthDate": "1996-05-29",
+        "verified": false
+    }
+}

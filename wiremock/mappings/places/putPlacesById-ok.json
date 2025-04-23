@@ -1,0 +1,54 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "PUT",
+        "urlPath": "/places/1",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.name)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.address)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.capacity =~ /^[0-9]+$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.area =~ /^[0-9]+$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.inaugurationDate =~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.hasParking == true || @.hasParking == false)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.equipment)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 202,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": 1,
+            "name": "{{jsonPath request.body '$.name'}}",
+            "address": "{{jsonPath request.body '$.address'}}",
+            "capacity": "{{jsonPath request.body '$.capacity'}}",
+            "area": "{{jsonPath request.body '$.area'}}",
+            "inaugurationDate": "{{jsonPath request.body '$.inaugurationDate'}}",
+            "hasParking": "{{jsonPath request.body '$.hasParking'}}",
+            "equipment": "{{jsonPath request.body '$.equipment'}}"
+        },
+        "transformers": [
+            "response-template"
+        ]
+    }
+}

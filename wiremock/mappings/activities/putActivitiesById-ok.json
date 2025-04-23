@@ -1,0 +1,78 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "PUT",
+        "urlPath": "/activities/1",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.title && @.title =~ /^[a-zA-Z0-9 áéíóúñÁÉÍÓÚÑ]{5,100}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.duration && @.duration =~ /^[0-9]{1,4}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.price && @.price =~ /^[0-9]{1,6}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.open == true || @.open == false)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.schedule && @.schedule =~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.conference && @.conference =~ /^[0-9]+$/)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 202,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": 1,
+            "title": "{{jsonPath request.body '$.title'}}",
+            "duration": "{{jsonPath request.body '$.duration'}}",
+            "price": "{{jsonPath request.body '$.price'}}",
+            "open": "{{jsonPath request.body '$.open'}}",
+            "schedule": "{{jsonPath request.body '$.schedule'}}",
+            "conference": {
+                "id": "{{jsonPath request.body '$.conference'}}",
+                "name": "3D Printing Day",
+                "capacity": 40,
+                "budget": 2800,
+                "online": true,
+                "startDate": "2025-07-11",
+                "place": {
+                    "id": 1,
+                    "name": "Place 1",
+                    "address": "Fake Street 123",
+                    "capacity": 100,
+                    "area": 200.0,
+                    "inaugurationDate": "2025-01-01",
+                    "hasParking": true,
+                    "equipment": "Projector, Whiteboard"
+                },
+                "organizer": {
+                    "id": 1,
+                    "firstName": "Javier",
+                    "lastName": "Sanz",
+                    "email": "javier@sanz.com",
+                    "age": 28,
+                    "height": 1.75,
+                    "interests": "Tech, 3D, videogames, etc",
+                    "birthDate": "1996-05-29",
+                    "verified": false
+                }
+            }
+        },
+        "transformers": [
+            "response-template"
+        ]
+    }
+}
