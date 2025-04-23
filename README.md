@@ -7,7 +7,7 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 ## Requisitos obligatorios
 ✅ Pepara tests unitarios y de integración para todas las clases obligatorias de tu API (eran 5 clases). En el caso de los tests de integración, preparar al menos para los casos 20X, 400 y 404 para cada operación.
 
-⬜ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
+✅ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
 
 ⬜ Prepara 3 tests en cada uno de los casos de prueba en una colección de Postman (la de la API que has implementado o la de la API Virtual)  forma que ésta se pueda lanzar utilizando el Collection Runner de Postman
 
