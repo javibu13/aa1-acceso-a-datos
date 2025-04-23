@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "ticketCode": "decc4d45-ce13-4925-8675-b89382ed255b",
+        "seatNumber": 3,
+        "ticketPrice": 15,
+        "checkedIn": true,
+        "registrationDate": "2025-04-02T00:23:46",
+        "person": {
+            "id": 2,
+            "firstName": "Montse",
+            "lastName": "García",
+            "email": "montse@garcia.com",
+            "age": 28,
+            "height": 1.58,
+            "interests": "Pixar, Animation, videogames, etc",
+            "birthDate": "1996-07-11",
+            "verified": true
+        },
+        "conference": {
+            "id": 1,
+            "name": "3D Printing Day",
+            "capacity": 40,
+            "budget": 2800,
+            "online": true,
+            "startDate": "2025-07-11",
+            "place": {
+                "id": 1,
+                "name": "Place 1",
+                "address": "Fake Street 123",
+                "capacity": 100,
+                "area": 200.0,
+                "inaugurationDate": "2025-01-01",
+                "hasParking": true,
+                "equipment": "Projector, Whiteboard"
+            },
+            "organizer": {
+                "id": 1,
+                "firstName": "Javier",
+                "lastName": "Sanz",
+                "email": "javier@sanz.com",
+                "age": 28,
+                "height": 1.75,
+                "interests": "Tech, 3D, videogames, etc",
+                "birthDate": "1996-05-29",
+                "verified": false
+            }
+        }
+    }
+]

@@ -1,0 +1,36 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "PUT",
+        "urlPattern": "/attendances/([0-9]+)",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.seatNumber && @.seatNumber =~ /^[0-9]{1,4}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.ticketPrice && @.ticketPrice =~ /^[0-9]{1,6}(\\.[0-9]{1,2})?$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.checkedIn == true || @.checkedIn == false)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.person && @.person =~ /^[0-9]+$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.conference && @.conference =~ /^[0-9]+$/)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "attendances/errorResponse-404.json"
+    }
+}

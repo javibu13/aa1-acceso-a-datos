@@ -1,0 +1,19 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/conferences",
+        "queryParameters": {
+            "minCapacity": {
+                "matches": "^[0-9]+$"
+            }
+        }
+    },
+    "response": {
+        "status": 500,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "errorResponse-500.json"
+    }
+}

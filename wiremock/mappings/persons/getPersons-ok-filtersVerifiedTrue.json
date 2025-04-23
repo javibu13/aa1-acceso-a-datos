@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPath": "/persons",
+        "queryParameters": {
+            "verified": {
+                "equalTo": "true"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "persons/getPersons-ok-filtersVerifiedTrue.json"
+    }
+}

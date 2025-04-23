@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPath": "/conferences",
+        "queryParameters": {
+            "isOnline": {
+                "equalTo": "false"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "conferences/getConferences-ok-filtersOnlineFalse.json"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "urlPath": "/places",
+        "queryParameters": {
+            "hasParking": {
+                "equalTo": "false"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "places/getPlaces-ok-filtersParkingFalse.json"
+    }
+}

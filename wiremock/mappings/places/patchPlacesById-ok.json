@@ -1,0 +1,19 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "PATCH",
+        "urlPath": "/places/1",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 202,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "places/getPlacesById-ok-1.json"
+    }
+}

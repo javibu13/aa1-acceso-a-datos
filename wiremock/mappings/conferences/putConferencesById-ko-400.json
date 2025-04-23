@@ -1,0 +1,23 @@
+{
+    "priority": 99,
+    "request": {
+        "method": "PUT",
+        "urlPathPattern": "/conferences/([0-9]+)",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 400,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "status": 400,
+            "error": "Bad Request",
+            "message": "Invalid request body"
+        }
+    }
+}

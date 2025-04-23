@@ -1,0 +1,10 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "DELETE",
+        "urlPath": "/persons/1"
+    },
+    "response": {
+        "status": 202
+    }
+}

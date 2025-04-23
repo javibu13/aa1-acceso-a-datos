@@ -1,0 +1,14 @@
+{
+    "priority": 99,
+    "request": {
+        "method": "GET",
+        "urlPath": "/conferences"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "conferences/getConferences-ok.json"
+    }
+}

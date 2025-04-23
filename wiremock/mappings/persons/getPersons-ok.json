@@ -1,0 +1,14 @@
+{
+    "priority": 99,
+    "request": {
+        "method": "GET",
+        "urlPath": "/persons"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "persons/getPersons-ok.json"
+    }
+}
