@@ -5,7 +5,7 @@ Proyecto sobre tests y despliegue de la API desarrollada con SpringBoot en Java 
 En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada como Actividad de Aprendizaje 1 de la asignatura de Acceso a Datos. Se pide una serie de requisitos a cumplir para la evaluación de la actividad.
 
 ## Requisitos obligatorios
-⬜ Pepara tests unitarios y de integración para todas las clases obligatorias de tu API (eran 5 clases). En el caso de los tests de integración, preparar al menos para los casos 20X, 400 y 404 para cada operación.
+✅ Pepara tests unitarios y de integración para todas las clases obligatorias de tu API (eran 5 clases). En el caso de los tests de integración, preparar al menos para los casos 20X, 400 y 404 para cada operación.
 
 ⬜ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
 
