@@ -1,0 +1,4046 @@
+{
+	"info": {
+		"_postman_id": "1023c818-ab13-4c20-a73d-e2d52477748b",
+		"name": "API_Eventos_WireMock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43611281",
+		"_collection_link": "https://javiersanz-5654809.postman.co/workspace/Javier-Sanz's-Workspace~3841216c-9712-4abf-808c-ea951556907c/collection/43611281-1023c818-ab13-4c20-a73d-e2d52477748b?action=share&source=collection_link&creator=43611281"
+	},
+	"item": [
+		{
+			"name": "persons",
+			"item": [
+				{
+					"name": "GET persons",
+					"item": [
+						{
+							"name": "persons-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "persons-ok verified",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons?verified=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									],
+									"query": [
+										{
+											"key": "verified",
+											"value": "false",
+											"disabled": true
+										},
+										{
+											"key": "verified",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "persons-ko FilterFirstNameAge",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when firstName or age query param is used)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons?firstName=Javier&verified=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": "Javier"
+										},
+										{
+											"key": "age",
+											"value": "28",
+											"disabled": true
+										},
+										{
+											"key": "verified",
+											"value": "true"
+										},
+										{
+											"key": "verified",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET personsById",
+					"item": [
+						{
+							"name": "personsById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST persons",
+					"item": [
+						{
+							"name": "persons-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 28,\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "persons-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (age field with wrong type)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": \"2a8\",\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "persons-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (age field is missing)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT personsById",
+					"item": [
+						{
+							"name": "personsById-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 28,\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (only id = 1 is not a 404)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"email\": \"javiersanzmoline@gmail.com\",\r\n    \"pass\": \"0f3fde0103dd44077c040215a2fabd09a097aecc\",\r\n    \"age\": 28,\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (missing field)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"lastName\": \"Sanz\",\r\n    \"height\": 1.75,\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH placesById",
+					"item": [
+						{
+							"name": "personsById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202 (no update applied to response)\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-2-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (FORCED to return 404 at id=2)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-*-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (FORCED to return 400 at id != 1 or id != 2)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Javier\",\r\n    \"interests\": \"Tech, 3D, videogames, etc\",\r\n    \"birthDate\": \"1996-05-29\",\r\n    \"verified\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE personsById",
+					"item": [
+						{
+							"name": "personsById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (FORCED to return 500 like database connection error when id != 1)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET personsByConferencesId",
+					"item": [
+						{
+							"name": "personsByConferencesId-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsByConferencesId-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personsByConferencesId-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/persons/conferences/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"persons",
+										"conferences",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "places",
+			"item": [
+				{
+					"name": "GET places",
+					"item": [
+						{
+							"name": "places-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "places-ok hasParking",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places?hasParking=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									],
+									"query": [
+										{
+											"key": "hasParking",
+											"value": "true"
+										},
+										{
+											"key": "hasParking",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "places-ko FilterMinMaxCapacity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when minCapacity or maxCapacity query param is used)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places?minCapacity=25&hasParking=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									],
+									"query": [
+										{
+											"key": "minCapacity",
+											"value": "25"
+										},
+										{
+											"key": "maxCapacity",
+											"value": "75",
+											"disabled": true
+										},
+										{
+											"key": "hasParking",
+											"value": "true"
+										},
+										{
+											"key": "hasParking",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET placesById",
+					"item": [
+						{
+							"name": "placesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST places",
+					"item": [
+						{
+							"name": "places-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": 50,\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": true,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "places-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (capacity field with wrong type)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": \"a\",\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": true,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "places-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (capacity field is missing)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": true,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT placesById",
+					"item": [
+						{
+							"name": "placesById-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": 25,\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (only id = 1 is not a 404)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"capacity\": 25,\r\n    \"area\": 400,\r\n    \"inaugurationDate\": \"2015-01-01\",\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (missing field)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Puerto Venecia\",\r\n    \"address\": \"Calle Teatro Malibrán\",\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Proyector, tablets, altavoces, etc.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH placesById",
+					"item": [
+						{
+							"name": "placesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202 (no update applied to response)\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capacity\": 30,\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Altavoz\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-2-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (FORCED to return 404 at id=2)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capacity\": 30,\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Altavoz\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-*-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (FORCED to return 400 at id != 1 or id != 2)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capacity\": 30,\r\n    \"hasParking\": false,\r\n    \"equipment\": \"Altavoz\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE placesById",
+					"item": [
+						{
+							"name": "placesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "placesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (FORCED to return 500 like database connection error when id != 1)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/places/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"places",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "conferences",
+			"item": [
+				{
+					"name": "GET conferences",
+					"item": [
+						{
+							"name": "conferences-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferences-ok isOnline",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences?isOnline=false",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									],
+									"query": [
+										{
+											"key": "isOnline",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "isOnline",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferences-ko FilterMinMaxCapacity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when minCapacity or maxCapacity query param is used)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences?minCapacity=25&isOnline=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									],
+									"query": [
+										{
+											"key": "minCapacity",
+											"value": "25"
+										},
+										{
+											"key": "maxCapacity",
+											"value": "75",
+											"disabled": true
+										},
+										{
+											"key": "isOnline",
+											"value": "true"
+										},
+										{
+											"key": "isOnline",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET conferencesById",
+					"item": [
+						{
+							"name": "conferencesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST conferences",
+					"item": [
+						{
+							"name": "conferences-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferences-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (budget field with wrong type)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": \"a\",\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferences-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (budget field is missing)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT conferencesById",
+					"item": [
+						{
+							"name": "conferencesById-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (only id = 1 is not a 404)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (missing field)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"online\": false,\r\n    \"startDate\": \"2025-05-29\",\r\n    \"place\": 1,\r\n    \"organizer\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH conferencesById",
+					"item": [
+						{
+							"name": "conferencesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202 (no update applied to response)\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-2-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (FORCED to return 404 at id=2)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-*-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (FORCED to return 400 at id != 1 or id != 2)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3D Printing Day\",\r\n    \"capacity\": 40,\r\n    \"budget\": 2800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE conferencesById",
+					"item": [
+						{
+							"name": "conferencesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (FORCED to return 500 like database connection error when id != 1)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET conferencesByPersonsId",
+					"item": [
+						{
+							"name": "conferencesByPersonsId-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/persons/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"persons",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesByPersonsId-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/persons/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"persons",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesByPersonsId-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/persons/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"persons",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET conferencesByOrganizersId",
+					"item": [
+						{
+							"name": "conferencesByOrganizersId-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/organizers/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"organizers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesByOrganizersId-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/organizers/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"organizers",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "conferencesByOrganizersId-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/conferences/organizers/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"conferences",
+										"organizers",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "activities",
+			"item": [
+				{
+					"name": "GET activities",
+					"item": [
+						{
+							"name": "activities-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activities-ok isOpen",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities?isOpen=false",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									],
+									"query": [
+										{
+											"key": "isOpen",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "isOpen",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activities-ko FilterMinMaxDuration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when minDuration or maxDuration query param is used)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities?minDuration=25&isOnline=false",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									],
+									"query": [
+										{
+											"key": "minDuration",
+											"value": "25"
+										},
+										{
+											"key": "maxDuration",
+											"value": "75",
+											"disabled": true
+										},
+										{
+											"key": "isOnline",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "isOnline",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET activitiesById",
+					"item": [
+						{
+							"name": "activitiesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST activities",
+					"item": [
+						{
+							"name": "activities-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activities-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (duration field with wrong type)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": \"a\",\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activities-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (duration field is missing)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT activitiesById",
+					"item": [
+						{
+							"name": "activitiesById-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (only id = 1 is not a 404)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (missing field)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"price\": 700,\r\n    \"open\": false,\r\n    \"schedule\": \"2025-05-29T10:00:00.000\",\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH activitiesById",
+					"item": [
+						{
+							"name": "activitiesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202 (no update applied to response)\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-2-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (FORCED to return 404 at id=2)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-*-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (FORCED to return 400 at id != 1 or id != 2)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calibración y limpieza\",\r\n    \"duration\": 90,\r\n    \"price\": 700\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE activitiesById",
+					"item": [
+						{
+							"name": "activitiesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (FORCED to return 500 like database connection error when id != 1)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET activitiesByConferencesId Copy",
+					"item": [
+						{
+							"name": "activitiesByConferencesId -1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/conferences/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesByConferencesId -2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/conferences/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"conferences",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activitiesByConferencesId -*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/activities/conferences/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"activities",
+										"conferences",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "attendances",
+			"item": [
+				{
+					"name": "GET attendances",
+					"item": [
+						{
+							"name": "attendances-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendances-ok hasParking",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances?isCheckedIn=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									],
+									"query": [
+										{
+											"key": "isCheckedIn",
+											"value": "true"
+										},
+										{
+											"key": "isCheckedIn",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendances-ko FilterMinMaxCapacity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when minSeatNumber or maxSeatNumber query param is used)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances?minSeatNumber=25&isCheckedIn=true",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									],
+									"query": [
+										{
+											"key": "minSeatNumber",
+											"value": "25"
+										},
+										{
+											"key": "maxSeatNumber",
+											"value": "75",
+											"disabled": true
+										},
+										{
+											"key": "isCheckedIn",
+											"value": "true"
+										},
+										{
+											"key": "isCheckedIn",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET attendancesById",
+					"item": [
+						{
+							"name": "attendancesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-2-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (internal server error FORCED when Id = 2)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (Id not found in database)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST attendances",
+					"item": [
+						{
+							"name": "attendances-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendances-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (seatNumber field with wrong type)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": \"a\",\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendances-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (seatNumber field is missing)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT attendancesById",
+					"item": [
+						{
+							"name": "attendancesById-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (only id = 1 is not a 404)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (missing field)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH attendancesById",
+					"item": [
+						{
+							"name": "attendancesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202 (no update applied to response)\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-2-ko-404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404 (FORCED to return 404 at id=2)\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-*-ko-400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400 (FORCED to return 400 at id != 1 or id != 2)\", function () {\r",
+											"  pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"seatNumber\": 2,\r\n    \"ticketPrice\": 10,\r\n    \"checkedIn\": false,\r\n    \"person\": 1,\r\n    \"conference\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE attendancesById",
+					"item": [
+						{
+							"name": "attendancesById-1-ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 202\", function () {\r",
+											"  pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "attendancesById-*-ko",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500 (FORCED to return 500 like database connection error when id != 1)\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{address}}:{{port}}/attendances/2",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{address}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"attendances",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
