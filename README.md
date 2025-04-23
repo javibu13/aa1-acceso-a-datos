@@ -9,7 +9,7 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 
 ✅ Diseña una API Virtual de forma que existan, al menos, 3 Casos de Uso para cada operación (tanto de OK como para KO). Prepara una colección Postman con todos los casos de prueba
 
-⬜ Prepara 3 tests en cada uno de los casos de prueba en una colección de Postman (la de la API que has implementado o la de la API Virtual)  forma que ésta se pueda lanzar utilizando el Collection Runner de Postman
+✅ Prepara 3 tests en cada uno de los casos de prueba en una colección de Postman (la de la API que has implementado o la de la API Virtual)  forma que ésta se pueda lanzar utilizando el Collection Runner de Postman
 
 ⬜ Instala y pon en marcha APIMan
 
@@ -18,7 +18,7 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 ## Requisitos opcionales
 ⬜ Utiliza las herramientas Git y GitHub durante todo el desarrollo de la aplicación. Utiliza Git Flow.
 
-⬜ Parametriza ambas colecciones Postman de forma que sea fácil cambiar el host, puerto o basePath de la API
+✅ Parametriza ambas colecciones Postman de forma que sea fácil cambiar el host, puerto o basePath de la API
 
 ⬜ Despliega en la nube alguna de tus APIs y publícala asi en APIMan
 
