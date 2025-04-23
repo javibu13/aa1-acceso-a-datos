@@ -1,0 +1,39 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "PUT",
+        "urlPattern": "/activities/([0-9]+)",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.title && @.title =~ /^[a-zA-Z0-9 áéíóúñÁÉÍÓÚÑ]{5,100}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.duration && @.duration =~ /^[0-9]{1,4}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.price && @.price =~ /^[0-9]{1,6}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.open == true || @.open == false)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.schedule && @.schedule =~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.conference && @.conference =~ /^[0-9]+$/)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "activities/errorResponse-404.json"
+    }
+}
