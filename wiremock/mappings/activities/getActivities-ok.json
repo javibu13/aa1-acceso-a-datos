@@ -1,0 +1,14 @@
+{
+    "priority": 99,
+    "request": {
+        "method": "GET",
+        "urlPath": "/activities"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "activities/getActivities-ok.json"
+    }
+}
