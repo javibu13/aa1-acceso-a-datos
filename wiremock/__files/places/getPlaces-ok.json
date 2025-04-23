@@ -18,15 +18,5 @@
         "inaugurationDate": "2025-02-01",
         "hasParking": false,
         "equipment": "Projector, Whiteboard, Sound System"
-    },
-    {
-        "id": 3,
-        "name": "Place 3",
-        "address": "Fake Street 789",
-        "capacity": 300,
-        "area": 400.0,
-        "inaugurationDate": "2025-03-01",
-        "hasParking": false,
-        "equipment": "Projector, Whiteboard, Sound System"
     }
 ]
