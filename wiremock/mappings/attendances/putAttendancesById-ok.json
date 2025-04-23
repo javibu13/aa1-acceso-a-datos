@@ -1,0 +1,86 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "PUT",
+        "urlPath": "/attendances/1",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.seatNumber && @.seatNumber =~ /^[0-9]{1,4}$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.ticketPrice && @.ticketPrice =~ /^[0-9]{1,6}(\\.[0-9]{1,2})?$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.checkedIn == true || @.checkedIn == false)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.person && @.person =~ /^[0-9]+$/)]"
+            },
+            {
+                "matchesJsonPath": "$[?(@.conference && @.conference =~ /^[0-9]+$/)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 202,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": 1,
+            "ticketCode": "decc4d45-ce13-4925-8675-b89382ed255b",
+            "seatNumber": "{{jsonPath request.body '$.seatNumber'}}",
+            "ticketPrice": "{{jsonPath request.body '$.ticketPrice'}}",
+            "checkedIn": "{{jsonPath request.body '$.checkedIn'}}",
+            "registrationDate": "2025-04-02T00:23:46",
+            "person": {
+                "id": "{{jsonPath request.body '$.person'}}",
+                "firstName": "Montse",
+                "lastName": "García",
+                "email": "montse@garcia.com",
+                "age": 28,
+                "height": 1.58,
+                "interests": "Pixar, Animation, videogames, etc",
+                "birthDate": "1996-07-11",
+                "verified": true
+            },
+            "conference": {
+                "id": "{{jsonPath request.body '$.conference'}}",
+                "name": "3D Printing Day",
+                "capacity": 40,
+                "budget": 2800,
+                "online": true,
+                "startDate": "2025-07-11",
+                "place": {
+                    "id": 1,
+                    "name": "Place 1",
+                    "address": "Fake Street 123",
+                    "capacity": 100,
+                    "area": 200.0,
+                    "inaugurationDate": "2025-01-01",
+                    "hasParking": true,
+                    "equipment": "Projector, Whiteboard"
+                },
+                "organizer": {
+                    "id": 1,
+                    "firstName": "Javier",
+                    "lastName": "Sanz",
+                    "email": "javier@sanz.com",
+                    "age": 28,
+                    "height": 1.75,
+                    "interests": "Tech, 3D, videogames, etc",
+                    "birthDate": "1996-05-29",
+                    "verified": false
+                }
+            }
+        },
+        "transformers": [
+            "response-template"
+        ]
+    }
+}
