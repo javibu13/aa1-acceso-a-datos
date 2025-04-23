@@ -1,0 +1,14 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPattern": "/persons/conferences/2"
+    },
+    "response": {
+        "status": 500,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "errorResponse-500.json"
+    }
+}
