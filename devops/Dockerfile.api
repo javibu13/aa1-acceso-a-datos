@@ -2,4 +2,5 @@ FROM maven:3.9.9-eclipse-temurin-21-alpine
 COPY ./ /api
 WORKDIR /api
 RUN mvn dependency:resolve
+RUN mv devops/application.properties src/main/resources/application.properties
 CMD mvn spring-boot:run
