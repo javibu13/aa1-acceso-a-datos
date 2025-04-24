@@ -16,7 +16,7 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 ✅ Publica la API de la 1ª Evaluación en APIMan (Gateway + Developer Portal) y configúralas para que sea necesario un API token para usarlas. Añade también al menos 2 políticas que afecten a su funcionamiento (limitación de uso, por ejemplo)
 
 ## Requisitos opcionales
-⬜ Utiliza las herramientas Git y GitHub durante todo el desarrollo de la aplicación. Utiliza Git Flow.
+✅ Utiliza las herramientas Git y GitHub durante todo el desarrollo de la aplicación. Utiliza Git Flow.
 
 ✅ Parametriza ambas colecciones Postman de forma que sea fácil cambiar el host, puerto o basePath de la API
 
@@ -24,9 +24,9 @@ En esta Actividad de Aprendizaje se trabajará a partir de la API desarrollada c
 
 ⬜ Instala Newman para lanzar las colecciones de tus APIs y sus tests desde la consola. Genera un informe con el resultado
 
-⬜ Utilizando docker compose, preparar un proyecto que permita lanzar tanto el servicio como la base de datos
+✅ Utilizando docker compose, preparar un proyecto que permita lanzar tanto el servicio como la base de datos
 
-⬜ Utilizando docker compose, prepara un entorno de pruebas con base de datos para utilizar localmente mientras desarrollas
+✅ Utilizando docker compose, prepara un entorno de pruebas con base de datos para utilizar localmente mientras desarrollas
 
 ⬜ Securiza tu API con JWT
 
