@@ -1,7 +1,7 @@
-name: 'apieventos'
+name: 'apieventos-develop'
 
 services:
-  mysql:
+  mysql-develop:
     image: 'mysql:9.2.0'
     environment:
       - 'MYSQL_DATABASE=apieventos_db'
@@ -11,18 +11,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./dbCreation.sql:/docker-entrypoint-initdb.d/dbCreation.sql
+      - ./dbPopulate.sql:/docker-entrypoint-initdb.d/dbPopulate.sql
     ports:
       - 3306:3306
-
-  api:
-    build:
-      context: ../
-      dockerfile: ./devops/Dockerfile.api
-    ports:
-      - 8081:8080
-    depends_on:
-      - mysql
-    command: ["mvn", "spring-boot:run"]
 
 volumes:
   mysql_data:
