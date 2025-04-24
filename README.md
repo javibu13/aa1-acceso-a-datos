@@ -46,9 +46,9 @@ Desde la terminal se debe ubicar en la carpeta devops del proyecto y ejecutar el
 docker compose up
 ```
 
-Esto levantará el contenedor de la base de datos y el contenedor de la API. La API estará disponible en el puerto 8080 y la base de datos en el puerto 3306.
+Esto levantará el contenedor de la base de datos y el contenedor de la API. La API estará disponible en el puerto 8081 (para evitar colisionar con otros servicios que por defecto son lanzados en 8080) y la base de datos en el puerto 3306.
 
-Las credenciales configuradas son de ejemplo y no son seguras. Se recomienda cambiarlas en un entorno de producción. Para ello se debe modificar el archivo `docker-compose.yml` y cambiar las variables de entorno `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER` y `MYSQL_PASSWORD` por las credenciales deseadas y hacer coincidir la nueva configuración en el archivo `application.properties` de la API.
+Las credenciales configuradas son de ejemplo y no son seguras. Se recomienda cambiarlas en un entorno de producción. Para ello se debe modificar el archivo `docker-compose.yml` y cambiar las variables de entorno `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER` y `MYSQL_PASSWORD` por las credenciales deseadas y hacer coincidir la nueva configuración en el archivo `application.properties` de la API de la misma carpeta de devops ya que sobreescribirá el archivo de la estructura del proyecto cuando se construya la imagen de la API.
 
 # Postman
 La colección de Postman se encuentra exportada en el fichero con nombre `API_Eventos.postman_collection.json`. Para importar la colección en Postman, se debe abrir Postman y hacer clic en el botón "Importar" en la parte superior izquierda. Luego, seleccionar el archivo `API_Eventos.postman_collection.json` y hacer clic en "Importar". Esto importará la colección de Postman con todas las peticiones necesarias para probar la API.
