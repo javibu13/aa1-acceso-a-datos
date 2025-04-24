@@ -50,6 +50,13 @@ Esto levantará el contenedor de la base de datos y el contenedor de la API. La 
 
 Las credenciales configuradas son de ejemplo y no son seguras. Se recomienda cambiarlas en un entorno de producción. Para ello se debe modificar el archivo `docker-compose.yml` y cambiar las variables de entorno `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER` y `MYSQL_PASSWORD` por las credenciales deseadas y hacer coincidir la nueva configuración en el archivo `application.properties` de la API de la misma carpeta de devops ya que sobreescribirá el archivo de la estructura del proyecto cuando se construya la imagen de la API.
 
+## Despliegue para pruebas y desarrollo
+Se recomienda utilizar el `docker-compose-develop.yaml` que se encuentra en la carpeta `devops` del proyecto. Este docker-compose levanta un contenedor de MySQL con datos de ejemplo iniciales para poder realizar pruebas y desarrollo de la API. Para ello, se debe ejecutar el siguiente comando desde la terminal en la carpeta `devops`:
+```
+docker compose -f docker-compose-develop.yaml up
+```
+
+
 # Postman
 La colección de Postman se encuentra exportada en el fichero con nombre `API_Eventos.postman_collection.json`. Para importar la colección en Postman, se debe abrir Postman y hacer clic en el botón "Importar" en la parte superior izquierda. Luego, seleccionar el archivo `API_Eventos.postman_collection.json` y hacer clic en "Importar". Esto importará la colección de Postman con todas las peticiones necesarias para probar la API.
 

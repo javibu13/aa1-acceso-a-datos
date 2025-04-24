@@ -1,0 +1,19 @@
+name: 'apieventos-develop'
+
+services:
+  mysql-develop:
+    image: 'mysql:9.2.0'
+    environment:
+      - 'MYSQL_DATABASE=apieventos_db'
+      - 'MYSQL_USER=user'
+      - 'MYSQL_PASSWORD=pass'
+      - 'MYSQL_ROOT_PASSWORD=SuperSecretPassword'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./dbCreation.sql:/docker-entrypoint-initdb.d/dbCreation.sql
+      - ./dbPopulate.sql:/docker-entrypoint-initdb.d/dbPopulate.sql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql_data:
